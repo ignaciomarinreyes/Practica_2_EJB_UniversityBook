@@ -5,6 +5,11 @@
         <title>UniversityBook</title> 
     </head>
     <body>
+        <% 
+            if(request.getSession().getAttribute("user") != null){
+                response.sendRedirect("/Practica_2_EJB_UniversityBook-war/FrontController?command=Login");
+            }
+        %>
         <header id="title"><span>UniversityBook</span></header> 
         <div id="divlogged">
             <form action='FrontController' method='POST'>
