@@ -24,15 +24,22 @@ import javax.naming.NamingException;
 public class PostUserBean implements PostUserBeanRemote {
 
     private ArrayList<Post> postsFollowedSubject;
+    private ArrayList<Post> myPosts;
 
     @PostConstruct
     public void init() {
         postsFollowedSubject = new ArrayList<Post>();
+        myPosts = new ArrayList<Post>();
     }
 
     @Override
     public java.util.ArrayList<Post> getPostsFollowedSubject() {
        return postsFollowedSubject;
+    }
+      
+    @Override
+    public ArrayList<Post> getMyPosts() {
+        return myPosts;
     }
 
     @Override
@@ -43,6 +50,11 @@ public class PostUserBean implements PostUserBeanRemote {
     @Override
     public void addDefaultPostsFollowedSubject(java.util.ArrayList<Post> posts) {
         postsFollowedSubject.addAll(posts);
-    }       
+    }
+
+    @Override
+    public void addDefaultMyPosts(java.util.ArrayList<Post> posts) {
+        myPosts.addAll(posts);
+    }     
     
 }

@@ -30,7 +30,6 @@ public class Login extends FrontCommand {
                     request.getSession().setAttribute("user", user);
                     if(postUserBean == null){
                         postUserBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostUserBean!components.PostUserBeanRemote");
-                        System.out.println(postUserBean.hashCode());
                         request.getSession().setAttribute("postUserBean", postUserBean);
                     }                   
                     loadDefaultValuesUser(user);
@@ -59,6 +58,7 @@ public class Login extends FrontCommand {
     }
 
     private void loadDefaultValuesUser(User user) {
-        postUserBean.addDefaultPostsFollowedSubject(Data.getPostsOfUser(user));
+        postUserBean.addDefaultPostsFollowedSubject(Data.getPostFollowedSubject(user));
+        postUserBean.addDefaultMyPosts(Data.getPostsOfUser(user));
     }
 }

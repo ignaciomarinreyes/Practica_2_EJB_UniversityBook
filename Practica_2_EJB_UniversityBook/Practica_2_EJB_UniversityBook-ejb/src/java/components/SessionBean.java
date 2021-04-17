@@ -7,8 +7,6 @@ package components;
 
 import entities.User;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.naming.InitialContext;
@@ -37,7 +35,6 @@ public class SessionBean implements SessionBeanRemote {
     @Override
     public User login(String nickName, String password) {   
         User user = userBean.getUser(nickName, password);
-        //User user = UserDAO.findByNickname_And_Password(nickName, password);
         System.out.println("LoginBean::login:: Inicia " +  user.getName() + " " + user.getSurname() + " sesión en la aplicación");
         if (user != null){
             usersLogged.add(user);

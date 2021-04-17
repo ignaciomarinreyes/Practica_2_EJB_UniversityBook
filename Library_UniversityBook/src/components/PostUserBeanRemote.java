@@ -7,6 +7,7 @@ package components;
 
 import entities.Post;
 import entities.User;
+import java.util.ArrayList;
 import javax.ejb.Remote;
 import javax.naming.NamingException;
 
@@ -22,5 +23,9 @@ public interface PostUserBeanRemote {
     void addPostFollowedSubject(Post post);
 
     void addDefaultPostsFollowedSubject(java.util.ArrayList<Post> posts);
+
+    void addDefaultMyPosts(java.util.ArrayList<Post> posts);
+
+    ArrayList<Post> getMyPosts();
     
 }
