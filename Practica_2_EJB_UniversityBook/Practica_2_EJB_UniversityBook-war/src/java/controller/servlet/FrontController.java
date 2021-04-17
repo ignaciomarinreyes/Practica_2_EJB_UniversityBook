@@ -49,7 +49,6 @@ public class FrontController extends HttpServlet {
     private Class getCommandClass(HttpServletRequest request) {
         Class result = null;
         final String command = "controller.commands." + (String) request.getParameter("command");
-        System.out.println(command);
         try {
             result = Class.forName(command);
         } catch (ClassNotFoundException e) {

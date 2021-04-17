@@ -136,5 +136,6 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", nickname=" + nickname + ", password=" + password + ", name=" + name + ", surname=" + surname + ", rol=" + rol + ", address=" + address + ", university=" + university + ", degree=" + degree + '}';
     }
+    
 
 }
