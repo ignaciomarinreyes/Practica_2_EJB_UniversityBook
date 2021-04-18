@@ -53,12 +53,13 @@ public class Login extends FrontCommand {
         if (userBean.getUsers().size() == 0) {
             Data.loadDefaultData();
             userBean.addDefaultUsers((ArrayList<User>) Data.getUsers());
-            postBean.addDefaultPosts((ArrayList<Post>) Data.getPosts());
+            postBean.addDefaultPosts((ArrayList<Post>) Data.getPosts());                        
         }
     }
 
     private void loadDefaultValuesUser(User user) {
         postUserBean.addDefaultPostsFollowedSubject(Data.getPostFollowedSubject(user));
         postUserBean.addDefaultMyPosts(Data.getPostsOfUser(user));
+        postUserBean.addDefaultSubjectsFollowed(Data.getSubjectFollowedUser(user));
     }
 }

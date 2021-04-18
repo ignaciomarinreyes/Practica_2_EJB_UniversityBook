@@ -6,7 +6,9 @@
 package components;
 
 import entities.Post;
+import entities.Subject;
 import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
 /**
@@ -17,7 +19,12 @@ import javax.ejb.Singleton;
 public class PostBean implements PostBeanRemote {
     
     private ArrayList<Post> posts;
-
+   
+    @PostConstruct
+    public void init() {
+        posts = new ArrayList<Post>();
+    }
+    
     @Override
     public void addPost(Post post) {
         posts.add(post);
@@ -30,6 +37,18 @@ public class PostBean implements PostBeanRemote {
 
     @Override
     public void addDefaultPosts(java.util.ArrayList<Post> posts) {
-        posts.addAll(posts);
+        this.posts.addAll(posts);
     }
+
+    @Override
+    public java.util.ArrayList<Post> getPostsSubject(int idUniversity ,int idDegree,int idSubject) {
+        ArrayList<Post> postsList = new ArrayList<Post>();
+        for(Post post: posts){
+            if(post.getSubject().getId() == idSubject && post.getSubject().getDegree().getId() == idDegree && post.getSubject().getUniversity().getId() == idUniversity){
+                postsList.add(post);
+            }
+        }
+        return postsList;
+    }   
+    
 }

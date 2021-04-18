@@ -10,7 +10,7 @@ public class User {
     private static int idUser = 0;
     private int id;
     private List<Post> posts;
-    private Set<Subject> subjects;
+    private List<Subject> subjects;
     private String nickname;
     private String password;
     private String name;
@@ -23,7 +23,7 @@ public class User {
     public User(String nickname, String password, String name, String surname, Rol rol, Address address, University university, Degree degree) {
         this.id = idUser++;
         this.posts = new ArrayList<Post>();
-        this.subjects = new HashSet<Subject>();
+        this.subjects = new ArrayList<Subject>();
         this.nickname = nickname;
         this.password = password;
         this.name = name;
@@ -41,10 +41,10 @@ public class User {
         this.surname = surname;
         this.rol = rol;
         this.address = address;
-        this.subjects = new HashSet<Subject>();
+        this.subjects = new ArrayList<Subject>();
     }
 
-    public Set<Subject> getSubjects() {
+    public List<Subject> getSubjects() {
         return subjects;
     }
 

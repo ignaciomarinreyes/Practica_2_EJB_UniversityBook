@@ -7,14 +7,10 @@ package components;
 
 import entities.Post;
 import entities.Subject;
-import entities.User;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 /**
  *
@@ -24,11 +20,13 @@ import javax.naming.NamingException;
 public class PostUserBean implements PostUserBeanRemote {
 
     private ArrayList<Post> postsFollowedSubject;
+    private ArrayList<Subject> followedSubjects;
     private ArrayList<Post> myPosts;
 
     @PostConstruct
     public void init() {
         postsFollowedSubject = new ArrayList<Post>();
+        followedSubjects = new ArrayList<Subject>();
         myPosts = new ArrayList<Post>();
     }
 
@@ -43,18 +41,32 @@ public class PostUserBean implements PostUserBeanRemote {
     }
 
     @Override
-    public void addPostFollowedSubject(Post post) {
-        postsFollowedSubject.add(post);
+    public void addPost(Post post) {  
+        myPosts.add(post);
+        for(Subject subjectFollowed :followedSubjects){
+            if(subjectFollowed.getId() == post.getSubject().getId()) postsFollowedSubject.add(post);
+        }       
     }
 
     @Override
     public void addDefaultPostsFollowedSubject(java.util.ArrayList<Post> posts) {
         postsFollowedSubject.addAll(posts);
     }
-
+    
     @Override
     public void addDefaultMyPosts(java.util.ArrayList<Post> posts) {
         myPosts.addAll(posts);
     }     
+
+    @Override
+    public void addDefaultSubjectsFollowed(java.util.ArrayList<Subject> subjects) {
+        followedSubjects.addAll(subjects);
+    }
+    
+    @Override
+    @Remove
+    public void remove(){
+        
+    }
     
 }
