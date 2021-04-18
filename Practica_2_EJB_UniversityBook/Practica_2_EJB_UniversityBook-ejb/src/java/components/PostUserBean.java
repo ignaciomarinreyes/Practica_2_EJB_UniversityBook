@@ -8,9 +8,13 @@ package components;
 import entities.Post;
 import entities.Subject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  *
@@ -19,20 +23,17 @@ import javax.ejb.Stateful;
 @Stateful
 public class PostUserBean implements PostUserBeanRemote {
 
-    private ArrayList<Post> postsFollowedSubject;
-    private ArrayList<Subject> followedSubjects;
     private ArrayList<Post> myPosts;
+    private PostBeanRemote postBean;
 
     @PostConstruct
     public void init() {
-        postsFollowedSubject = new ArrayList<Post>();
-        followedSubjects = new ArrayList<Subject>();
+        try {
+            postBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBean!components.PostBeanRemote");
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        }
         myPosts = new ArrayList<Post>();
-    }
-
-    @Override
-    public java.util.ArrayList<Post> getPostsFollowedSubject() {
-       return postsFollowedSubject;
     }
       
     @Override
@@ -43,25 +44,13 @@ public class PostUserBean implements PostUserBeanRemote {
     @Override
     public void addPost(Post post) {  
         myPosts.add(post);
-        for(Subject subjectFollowed :followedSubjects){
-            if(subjectFollowed.getId() == post.getSubject().getId()) postsFollowedSubject.add(post);
-        }       
-    }
-
-    @Override
-    public void addDefaultPostsFollowedSubject(java.util.ArrayList<Post> posts) {
-        postsFollowedSubject.addAll(posts);
+        postBean.addPost(post);
     }
     
     @Override
     public void addDefaultMyPosts(java.util.ArrayList<Post> posts) {
         myPosts.addAll(posts);
     }     
-
-    @Override
-    public void addDefaultSubjectsFollowed(java.util.ArrayList<Subject> subjects) {
-        followedSubjects.addAll(subjects);
-    }
     
     @Override
     @Remove

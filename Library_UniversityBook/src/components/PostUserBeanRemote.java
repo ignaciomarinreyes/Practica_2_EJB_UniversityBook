@@ -19,17 +19,11 @@ import javax.naming.NamingException;
 @Remote
 public interface PostUserBeanRemote {
 
-    java.util.ArrayList<Post> getPostsFollowedSubject();
-
     void addPost(Post post);
-
-    void addDefaultPostsFollowedSubject(java.util.ArrayList<Post> posts);
 
     void addDefaultMyPosts(java.util.ArrayList<Post> posts);
 
     ArrayList<Post> getMyPosts();
-
-    void addDefaultSubjectsFollowed(java.util.ArrayList<Subject> subjects);
     
     void remove();
     

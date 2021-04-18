@@ -33,13 +33,13 @@ public class Login extends FrontCommand {
                         request.getSession().setAttribute("postUserBean", postUserBean);
                     }                   
                     loadDefaultValuesUser(user);
-                    request.setAttribute("PostsFollowedSubjectsByUser", postUserBean.getPostsFollowedSubject());
+                    request.setAttribute("PostsFollowedSubjectsByUser", postBean.getPostsFollowedSubjectByUser(user));
                     forward("/MainFrame.jsp");
                 } else {
                     forward("/index.jsp");
                 }
             } else {
-                request.setAttribute("PostsFollowedSubjectsByUser", postUserBean.getPostsFollowedSubject());
+                request.setAttribute("PostsFollowedSubjectsByUser", postBean.getPostsFollowedSubjectByUser((User) request.getSession().getAttribute("user")));
                 forward("/MainFrame.jsp");
             }
         } catch (NamingException ex) {
@@ -58,8 +58,6 @@ public class Login extends FrontCommand {
     }
 
     private void loadDefaultValuesUser(User user) {
-        postUserBean.addDefaultPostsFollowedSubject(Data.getPostFollowedSubject(user));
         postUserBean.addDefaultMyPosts(Data.getPostsOfUser(user));
-        postUserBean.addDefaultSubjectsFollowed(Data.getSubjectFollowedUser(user));
     }
 }

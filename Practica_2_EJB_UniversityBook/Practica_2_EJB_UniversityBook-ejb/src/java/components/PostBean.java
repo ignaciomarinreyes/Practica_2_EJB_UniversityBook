@@ -7,6 +7,7 @@ package components;
 
 import entities.Post;
 import entities.Subject;
+import entities.User;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -49,6 +50,21 @@ public class PostBean implements PostBeanRemote {
             }
         }
         return postsList;
-    }   
+    }
+
+    @Override
+    public ArrayList<Post> getPostsFollowedSubjectByUser(User user) {
+        ArrayList<Post> postsList = new ArrayList<Post>();
+        for(Post post: posts){
+            for(Subject subjectFollowed: user.getSubjects()){
+                if(post.getSubject().getId() == subjectFollowed.getId()){
+                    postsList.add(post);
+                }
+            }
+        }
+        return postsList;
+    }
+    
+    
     
 }

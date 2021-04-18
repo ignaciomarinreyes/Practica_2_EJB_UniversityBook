@@ -1,17 +1,25 @@
 package controller.commands;
 
-import components.PostUserBeanRemote;
+import components.PostBeanRemote;
 import entities.User;
 import data.dao.PostDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 public class ShowPostsFollowedSubject extends FrontCommand {
 
-    private PostUserBeanRemote postUserBean;
+    private PostBeanRemote postBean;
     
     @Override
     public void process() {
-        postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean");
-        request.setAttribute("PostsFollowedSubjectsByUser", postUserBean.getPostsFollowedSubject());
+        try {
+            postBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBean!components.PostBeanRemote");
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        }
+        request.setAttribute("PostsFollowedSubjectsByUser", postBean.getPostsFollowedSubjectByUser((User) request.getSession().getAttribute("user")));
         forward("/MainFrame.jsp");
     }
 

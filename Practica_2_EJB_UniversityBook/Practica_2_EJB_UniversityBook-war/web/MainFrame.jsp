@@ -12,7 +12,7 @@
     public static String printPosts(List<Post> posts) {
         String result = "";
         for (Post post : posts) {
-            result += "<div class='post'><h1>" + post.getTitle() + "</h1>"
+            result += "<div class='post'><p class='subjectPost' style='border-bottom: none; padding-bottom: 0px;'>" + post.getSubject().getName() +"</p><h1>" + post.getTitle() + "</h1>"
                     + "<div class='tuser'><span>" + post.getUser().getName() + "</span><span> " + post.getDate() + "</span></div>"
                     + "<p>" + post.getContent() + "</p>";
             if (post.getPathImage() != null) {

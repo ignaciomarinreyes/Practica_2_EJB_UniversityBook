@@ -122,6 +122,13 @@ input[type=submit]{
     margin-bottom: 30px;
 }
 
+.subjectPost{
+    color: #2075c3;
+    font-size: 13pt;
+    text-align: left;
+    padding-bottom: 0px;
+}
+
 
 
 

@@ -7,6 +7,7 @@ package components;
 
 import entities.Post;
 import entities.Subject;
+import entities.User;
 import java.util.ArrayList;
 import javax.ejb.Remote;
 
@@ -24,5 +25,7 @@ public interface PostBeanRemote {
     void addDefaultPosts(java.util.ArrayList<Post> posts);
 
     java.util.ArrayList<Post> getPostsSubject(int idUniversity ,int idDegree,int idSubject);
+
+    ArrayList<Post> getPostsFollowedSubjectByUser(User user);
     
 }

@@ -27,7 +27,6 @@ public class Publish extends FrontCommand {
         }
         postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean");
         Post post = new Post(request.getParameter("title"), (User) request.getSession().getAttribute("user"), LocalDate.now(), request.getParameter("content"), null, SubjectDAO.findById(Integer.valueOf(request.getParameter("subject"))));
-        postBean.addPost(post);
         postUserBean.addPost(post);
         request.setAttribute("postsMYUser", postUserBean.getMyPosts());
         forward("/ShowMyPosts.jsp");
