@@ -15,16 +15,10 @@ import javax.naming.NamingException;
 
 public class Publish extends FrontCommand {
 
-    private PostBeanRemote postBean;
     private PostUserBeanRemote postUserBean;
     
     @Override
     public void process() {
-        try {
-            postBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBean!components.PostBeanRemote");
-        } catch (NamingException ex) {
-            ex.printStackTrace();
-        }
         postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean");
         Post post = new Post(request.getParameter("title"), (User) request.getSession().getAttribute("user"), LocalDate.now(), request.getParameter("content"), null, SubjectDAO.findById(Integer.valueOf(request.getParameter("subject"))));
         postUserBean.addPost(post);

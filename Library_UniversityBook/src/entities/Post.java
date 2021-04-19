@@ -108,6 +108,10 @@ public class Post {
     }
 
     public int numberLikes() {
+        for(User user: likes){
+            System.out.println(user.getId());
+        }
+        
         return likes.size();
     }
 
@@ -119,5 +123,6 @@ public class Post {
     public String toString() {
         return "Post{" + "id=" + id + ", title=" + title + ", user=" + user + ", date=" + date + ", content=" + content + ", pathImage=" + pathImage + '}';
     }
+    
 
 }

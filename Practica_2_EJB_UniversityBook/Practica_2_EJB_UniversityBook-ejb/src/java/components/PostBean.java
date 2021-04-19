@@ -18,14 +18,14 @@ import javax.ejb.Singleton;
  */
 @Singleton
 public class PostBean implements PostBeanRemote {
-    
+
     private ArrayList<Post> posts;
-   
+
     @PostConstruct
     public void init() {
         posts = new ArrayList<Post>();
     }
-    
+
     @Override
     public void addPost(Post post) {
         posts.add(post);
@@ -42,10 +42,10 @@ public class PostBean implements PostBeanRemote {
     }
 
     @Override
-    public java.util.ArrayList<Post> getPostsSubject(int idUniversity ,int idDegree,int idSubject) {
+    public java.util.ArrayList<Post> getPostsSubject(int idUniversity, int idDegree, int idSubject) {
         ArrayList<Post> postsList = new ArrayList<Post>();
-        for(Post post: posts){
-            if(post.getSubject().getId() == idSubject && post.getSubject().getDegree().getId() == idDegree && post.getSubject().getUniversity().getId() == idUniversity){
+        for (Post post : posts) {
+            if (post.getSubject().getId() == idSubject && post.getSubject().getDegree().getId() == idDegree && post.getSubject().getUniversity().getId() == idUniversity) {
                 postsList.add(post);
             }
         }
@@ -55,16 +55,26 @@ public class PostBean implements PostBeanRemote {
     @Override
     public ArrayList<Post> getPostsFollowedSubjectByUser(User user) {
         ArrayList<Post> postsList = new ArrayList<Post>();
-        for(Post post: posts){
-            for(Subject subjectFollowed: user.getSubjects()){
-                if(post.getSubject().getId() == subjectFollowed.getId()){
+        for (Post post : posts) {
+            for (Subject subjectFollowed : user.getSubjects()) {
+                if (post.getSubject().getId() == subjectFollowed.getId()) {
                     postsList.add(post);
                 }
             }
         }
         return postsList;
     }
-    
-    
-    
+
+    @Override
+    public void addLikePost(User user, int idPost) {
+        System.out.println(user);
+        System.out.println(user.hashCode());
+        for (Post post : posts) {
+            if (post.getId() == idPost) {
+                post.addLike(user);
+            }
+        }
+    }
+
+
 }

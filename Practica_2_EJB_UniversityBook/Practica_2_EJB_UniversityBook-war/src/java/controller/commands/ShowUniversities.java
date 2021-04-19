@@ -1,5 +1,6 @@
 package controller.commands;
 
+import components.StudyBeanRemote;
 import entities.University;
 import data.Data;
 import java.io.IOException;
@@ -7,15 +8,24 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import util.XsltProcessor;
 
 public class ShowUniversities extends FrontCommand {
 
+    private StudyBeanRemote studyBean;
+    
     @Override
     public void process() {
         PrintWriter out = null;
         try {
-            List<University> universities = Data.getUniversities();
+            studyBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StudyBean!components.StudyBeanRemote");
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            List<University> universities = studyBean.getUniversities();
             XsltProcessor processor = new XsltProcessor("university.xsl");
             out = response.getWriter();
             out.println(head());

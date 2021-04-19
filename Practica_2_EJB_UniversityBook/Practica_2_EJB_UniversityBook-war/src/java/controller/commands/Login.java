@@ -3,9 +3,13 @@ package controller.commands;
 import components.PostBeanRemote;
 import components.PostUserBeanRemote;
 import components.SessionBeanRemote;
+import components.StudyBeanRemote;
 import components.UserBeanRemote;
 import data.Data;
+import entities.Degree;
 import entities.Post;
+import entities.Subject;
+import entities.University;
 import entities.User;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
@@ -17,6 +21,7 @@ public class Login extends FrontCommand {
     UserBeanRemote userBean;
     PostBeanRemote postBean;
     PostUserBeanRemote postUserBean;
+    StudyBeanRemote studyBean;
 
     @Override
     public void process() {
@@ -50,10 +55,14 @@ public class Login extends FrontCommand {
     private void loadDefaulValues() throws NamingException {
         userBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/UserBean!components.UserBeanRemote");
         postBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBean!components.PostBeanRemote");
+        studyBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StudyBean!components.StudyBeanRemote");
         if (userBean.getUsers().size() == 0) {
             Data.loadDefaultData();
             userBean.addDefaultUsers((ArrayList<User>) Data.getUsers());
-            postBean.addDefaultPosts((ArrayList<Post>) Data.getPosts());                        
+            postBean.addDefaultPosts((ArrayList<Post>) Data.getPosts()); 
+            studyBean.addDefaultUniversities((ArrayList<University>) Data.getUniversities());
+            studyBean.addDefaultDegrees((ArrayList<Degree>) Data.getDegrees());
+            studyBean.addDefaultSubjects((ArrayList<Subject>) Data.getSubjects());
         }
     }
 

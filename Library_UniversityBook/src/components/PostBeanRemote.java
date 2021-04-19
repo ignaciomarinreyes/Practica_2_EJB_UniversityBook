@@ -27,5 +27,7 @@ public interface PostBeanRemote {
     java.util.ArrayList<Post> getPostsSubject(int idUniversity ,int idDegree,int idSubject);
 
     ArrayList<Post> getPostsFollowedSubjectByUser(User user);
+
+    void addLikePost(User user, int idPost);
     
 }

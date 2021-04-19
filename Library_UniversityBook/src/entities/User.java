@@ -136,6 +136,24 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", nickname=" + nickname + ", password=" + password + ", name=" + name + ", surname=" + surname + ", rol=" + rol + ", address=" + address + ", university=" + university + ", degree=" + degree + '}';
     }
-    
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }
