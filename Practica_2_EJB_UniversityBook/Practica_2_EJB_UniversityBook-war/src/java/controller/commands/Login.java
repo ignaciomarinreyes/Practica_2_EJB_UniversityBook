@@ -35,6 +35,7 @@ public class Login extends FrontCommand {
                     request.getSession().setAttribute("user", user);
                     if(postUserBean == null){
                         postUserBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostUserBean!components.PostUserBeanRemote");
+                        postBean.addPostUserBean();
                         request.getSession().setAttribute("postUserBean", postUserBean);
                     }                   
                     loadDefaultValuesUser(user);

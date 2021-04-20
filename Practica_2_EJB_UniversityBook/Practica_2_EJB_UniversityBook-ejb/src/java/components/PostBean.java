@@ -9,8 +9,12 @@ import entities.Post;
 import entities.Subject;
 import entities.User;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  *
@@ -20,10 +24,12 @@ import javax.ejb.Singleton;
 public class PostBean implements PostBeanRemote {
 
     private ArrayList<Post> posts;
-
+    private ArrayList<PostUserBeanRemote> postUserBeans;
+    
     @PostConstruct
     public void init() {
         posts = new ArrayList<Post>();
+        postUserBeans = new ArrayList<PostUserBeanRemote>();
     }
 
     @Override
@@ -76,5 +82,15 @@ public class PostBean implements PostBeanRemote {
         }
     }
 
+    @Override
+    public void addPostUserBean(){
+        PostUserBeanRemote postUserBean = null;
+        try {
+            postUserBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostUserBean!components.PostUserBeanRemote");
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        }
+        postUserBeans.add(postUserBean);
+    }
 
 }

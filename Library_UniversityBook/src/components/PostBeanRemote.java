@@ -29,5 +29,7 @@ public interface PostBeanRemote {
     ArrayList<Post> getPostsFollowedSubjectByUser(User user);
 
     void addLikePost(User user, int idPost);
+
+    public void addPostUserBean();
     
 }
