@@ -1,6 +1,4 @@
 <%@page import="java.util.List"%>
-<%@page import="data.dao.PostDAO"%>
-<%@page import="data.Data"%>
 <%@page import="entities.Comment"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.ArrayList"%>

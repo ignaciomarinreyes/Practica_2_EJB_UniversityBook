@@ -1,9 +1,7 @@
 package controller.commands;
 
 import components.PostBeanRemote;
-import entities.Post;
 import entities.User;
-import data.dao.PostDAO;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 

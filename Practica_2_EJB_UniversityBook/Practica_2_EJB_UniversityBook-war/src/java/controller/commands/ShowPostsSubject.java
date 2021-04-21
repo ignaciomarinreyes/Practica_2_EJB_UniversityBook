@@ -1,9 +1,6 @@
 package controller.commands;
 
 import components.PostBeanRemote;
-import data.dao.PostDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 

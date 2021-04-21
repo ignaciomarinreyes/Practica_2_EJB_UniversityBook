@@ -2,8 +2,6 @@
 package controller.commands;
 
 import components.PostUserBeanRemote;
-import entities.User;
-import data.dao.PostDAO;
 
 public class ShowMyPosts extends FrontCommand{
 

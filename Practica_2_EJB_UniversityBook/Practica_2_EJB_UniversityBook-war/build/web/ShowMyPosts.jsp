@@ -1,5 +1,4 @@
 <%@page import="java.util.List"%>
-<%@page import="data.Data"%>
 <%@page import="entities.User"%>
 <%@page import="entities.Comment"%>
 <%@page import="java.time.LocalDate"%>
