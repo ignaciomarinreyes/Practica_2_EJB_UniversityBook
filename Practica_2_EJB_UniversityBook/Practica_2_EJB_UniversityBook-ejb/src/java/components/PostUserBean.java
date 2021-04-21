@@ -7,10 +7,12 @@ package components;
 
 import entities.Post;
 import entities.Subject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.naming.InitialContext;
@@ -24,16 +26,17 @@ import javax.naming.NamingException;
 public class PostUserBean implements PostUserBeanRemote {
 
     private ArrayList<Post> myPosts;
-    private PostBeanRemote postBean;
+    private PostBeanLocalLocal postBeanLocal;
 
     @PostConstruct
     public void init() {
-        try {
-            postBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBean!components.PostBeanRemote");
+        myPosts = new ArrayList<Post>();
+        try {      
+            postBeanLocal = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBeanLocal!components.PostBeanLocalLocal");
         } catch (NamingException ex) {
             ex.printStackTrace();
         }
-        myPosts = new ArrayList<Post>();
+        postBeanLocal.addPostUserBean(this);
     }
       
     @Override
@@ -44,7 +47,7 @@ public class PostUserBean implements PostUserBeanRemote {
     @Override
     public void addPost(Post post) {  
         myPosts.add(post);
-        postBean.addPost(post);
+        //postBean.addPost(post);
     }
     
     @Override

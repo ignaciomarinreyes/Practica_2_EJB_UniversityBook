@@ -8,6 +8,9 @@ package components;
 import entities.Post;
 import entities.Subject;
 import entities.User;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,12 +27,12 @@ import javax.naming.NamingException;
 public class PostBean implements PostBeanRemote {
 
     private ArrayList<Post> posts;
-    private ArrayList<PostUserBeanRemote> postUserBeans;
+    private ArrayList<PostUserBean> postUserBeans;
     
     @PostConstruct
     public void init() {
         posts = new ArrayList<Post>();
-        postUserBeans = new ArrayList<PostUserBeanRemote>();
+        postUserBeans = new ArrayList<PostUserBean>();
     }
 
     @Override
@@ -80,17 +83,13 @@ public class PostBean implements PostBeanRemote {
                 post.addLike(user);
             }
         }
+        
     }
 
-    @Override
-    public void addPostUserBean(){
-        PostUserBeanRemote postUserBean = null;
-        try {
-            postUserBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostUserBean!components.PostUserBeanRemote");
-        } catch (NamingException ex) {
-            ex.printStackTrace();
-        }
+    public void addPostUserBean(PostUserBean postUserBean){
         postUserBeans.add(postUserBean);
     }
+
+
 
 }
