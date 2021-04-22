@@ -5,23 +5,17 @@
  */
 package components;
 
+import data.Data;
 import entities.Post;
-import entities.Subject;
-import java.io.Serializable;
+import entities.User;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-/**
- *
- * @author ignacio
- */
+
 @Stateful
 public class PostUserBean implements PostUserBeanRemote {
 
@@ -47,18 +41,17 @@ public class PostUserBean implements PostUserBeanRemote {
     @Override
     public void addPost(Post post) {  
         myPosts.add(post);
-        //postBean.addPost(post);
     }
     
     @Override
-    public void addDefaultMyPosts(java.util.ArrayList<Post> posts) {
-        myPosts.addAll(posts);
-    }     
-    
+    public void addDefaultMyPosts(User user) {
+        myPosts.addAll(Data.getPostsOfUser(user));
+    }  
+  
     @Override
     @Remove
     public void remove(){
-        
+        postBeanLocal.removePostUserBean(this);
     }
     
 }

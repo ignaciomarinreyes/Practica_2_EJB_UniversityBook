@@ -18,12 +18,6 @@ import javax.ejb.Remote;
 @Remote
 public interface StudyBeanRemote {
 
-    void addDefaultUniversities(java.util.ArrayList<University> universities);
-
-    void addDefaultDegrees(java.util.ArrayList<Degree> degrees);
-
-    void addDefaultSubjects(java.util.ArrayList<Subject> subjects);
-
     ArrayList<University> getUniversities();
 
     ArrayList<Degree> getDegrees();

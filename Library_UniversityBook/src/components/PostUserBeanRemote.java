@@ -21,7 +21,7 @@ public interface PostUserBeanRemote {
 
     void addPost(Post post);
 
-    void addDefaultMyPosts(java.util.ArrayList<Post> posts);
+    void addDefaultMyPosts(User user);
 
     ArrayList<Post> getMyPosts();
     

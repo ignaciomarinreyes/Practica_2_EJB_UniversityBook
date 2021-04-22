@@ -1,12 +1,14 @@
 
 package components;
 
+import data.Data;
 import entities.User;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 
-
+@Startup
 @Singleton
 public class UserBean implements UserBeanRemote {
     private ArrayList<User> users;
@@ -14,6 +16,7 @@ public class UserBean implements UserBeanRemote {
     @PostConstruct
     public void init(){
         users = new ArrayList<User>();
+        users.addAll(Data.getUsers());
     }
 
     @Override
@@ -24,11 +27,6 @@ public class UserBean implements UserBeanRemote {
             }
         }
         return null;
-    }
-
-    @Override
-    public void addDefaultUsers(java.util.ArrayList<User> users) {
-        this.users.addAll(users);
     }
 
     @Override

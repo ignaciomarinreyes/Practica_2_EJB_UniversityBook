@@ -2,7 +2,6 @@ package controller.commands;
 
 import components.StudyBeanRemote;
 import entities.University;
-import data.Data;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

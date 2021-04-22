@@ -5,17 +5,16 @@
  */
 package components;
 
+import data.Data;
 import entities.Degree;
 import entities.Subject;
 import entities.University;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 
-/**
- *
- * @author ignacio
- */
+@Startup
 @Singleton
 public class StudyBean implements StudyBeanRemote {
 
@@ -28,22 +27,10 @@ public class StudyBean implements StudyBeanRemote {
         universities = new ArrayList<University>();
         degrees = new ArrayList<Degree>();
         subjects = new ArrayList<Subject>();
+        universities.addAll(Data.getUniversities());
+        degrees.addAll(Data.getDegrees());
+        subjects.addAll(Data.getSubjects());
     }
-
-    @Override
-    public void addDefaultUniversities(java.util.ArrayList<University> universities) {
-        this.universities.addAll(universities);
-    }
-
-    @Override
-    public void addDefaultDegrees(java.util.ArrayList<Degree> degrees) {
-        this.degrees.addAll(degrees);
-    }
-
-    @Override
-    public void addDefaultSubjects(java.util.ArrayList<Subject> subjects) {
-        this.subjects.addAll(subjects);
-    }   
 
     @Override
     public ArrayList<University> getUniversities() {
@@ -59,7 +46,5 @@ public class StudyBean implements StudyBeanRemote {
     public ArrayList<Subject> getSubjects() {
         return subjects;
     }  
-    
-   
-    
+  
 }

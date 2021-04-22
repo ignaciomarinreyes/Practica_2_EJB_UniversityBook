@@ -5,6 +5,9 @@
  */
 package components;
 
+import entities.Post;
+import entities.User;
+import java.util.ArrayList;
 import javax.ejb.Local;
 
 /**
@@ -15,5 +18,15 @@ import javax.ejb.Local;
 public interface PostBeanLocalLocal {
 
     void addPostUserBean(PostUserBean postUserBean);
+    
+    ArrayList<Post> getPostsFollowedSubjectByUser(User user);
+
+    void addLikePost(User user, int idPost);
+    
+    java.util.ArrayList<Post> getPostsSubject(int idUniversity ,int idDegree,int idSubject);
+    
+    ArrayList<Post> getPosts();
+    
+    void removePostUserBean(PostUserBean postUserBean);
     
 }

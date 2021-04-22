@@ -1,13 +1,13 @@
 package controller.commands;
 
-import components.PostBeanRemote;
+import components.PostBeanLocalLocal;
 import entities.User;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class GiveLike extends FrontCommand {
 
-    private PostBeanRemote postBean;
+    private PostBeanLocalLocal postBean;
     
     @Override
     public void process() {

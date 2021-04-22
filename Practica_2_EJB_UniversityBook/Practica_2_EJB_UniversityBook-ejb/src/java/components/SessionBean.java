@@ -9,13 +9,11 @@ import entities.User;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-/**
- *
- * @author ignacio
- */
+@Startup
 @Singleton
 public class SessionBean implements SessionBeanRemote {
 

@@ -1,6 +1,7 @@
 package controller.commands;
 
 import components.PostUserBeanRemote;
+import entities.User;
 
 
 public class Logout extends FrontCommand {

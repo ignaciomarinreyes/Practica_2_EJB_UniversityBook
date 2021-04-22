@@ -18,8 +18,6 @@ public interface UserBeanRemote {
 
     User getUser(String nickName, String password);
 
-    void addDefaultUsers(java.util.ArrayList<User> users);
-
     ArrayList<User> getUsers();
     
 }
