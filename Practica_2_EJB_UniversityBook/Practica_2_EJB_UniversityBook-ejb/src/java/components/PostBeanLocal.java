@@ -79,4 +79,14 @@ public class PostBeanLocal implements PostBeanLocalLocal {
         return postsList;
     }
 
+    @Override
+    public PostUserBean getPostUserBean(User user) {
+        for(PostUserBean postUserBean: postUserBeans){
+            if(postUserBean.getUser().getId() == user.getId()){
+                return postUserBean;
+            }
+        }
+        return null;
+    }
+
 }

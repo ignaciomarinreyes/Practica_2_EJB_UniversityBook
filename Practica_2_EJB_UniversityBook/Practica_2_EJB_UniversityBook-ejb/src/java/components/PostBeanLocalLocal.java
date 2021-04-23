@@ -28,5 +28,7 @@ public interface PostBeanLocalLocal {
     ArrayList<Post> getPosts();
     
     void removePostUserBean(PostUserBean postUserBean);
+
+    public PostUserBean getPostUserBean(User user);
     
 }

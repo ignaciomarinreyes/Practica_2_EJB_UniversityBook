@@ -1,6 +1,7 @@
 package controller.commands;
 
 import components.PostBeanLocalLocal;
+import components.PostUserBean;
 import components.PostUserBeanRemote;
 import components.SessionBeanRemote;
 import entities.User;
@@ -18,14 +19,20 @@ public class Login extends FrontCommand {
         try {
             sessionBeanRemote = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/SessionBean!components.SessionBeanRemote");
             postBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBeanLocal!components.PostBeanLocalLocal");
-            postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean");
             if ((User) request.getSession().getAttribute("user") == null) {
                 User user = sessionBeanRemote.login(request.getParameter("nickname"), request.getParameter("password"));
+                postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean" + user.getId());
                 if (user != null) {
                     request.getSession().setAttribute("user", user);
                     if(postUserBean == null){
-                        postUserBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostUserBean!components.PostUserBeanRemote");
-                        request.getSession().setAttribute("postUserBean", postUserBean);
+                        PostUserBean postUserBeanOfArray = postBean.getPostUserBean(user);
+                        if(postUserBeanOfArray != null){
+                            postUserBean = postUserBeanOfArray;
+                        } else {
+                            postUserBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostUserBean!components.PostUserBeanRemote");
+                            postUserBean.setUser(user);
+                        }                      
+                        request.getSession().setAttribute("postUserBean" + user.getId(), postUserBean);
                         postUserBean.addDefaultMyPosts(user);
                     }                                    
                     request.setAttribute("PostsFollowedSubjectsByUser", postBean.getPostsFollowedSubjectByUser(user));

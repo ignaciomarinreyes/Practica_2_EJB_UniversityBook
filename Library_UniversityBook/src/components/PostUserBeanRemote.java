@@ -26,5 +26,9 @@ public interface PostUserBeanRemote {
     ArrayList<Post> getMyPosts();
     
     void remove();
+
+    void setUser(User user);
+    
+    User getUser();
     
 }

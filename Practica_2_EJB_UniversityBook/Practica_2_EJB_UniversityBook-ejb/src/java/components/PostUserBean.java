@@ -21,6 +21,7 @@ public class PostUserBean implements PostUserBeanRemote {
 
     private ArrayList<Post> myPosts;
     private PostBeanLocalLocal postBeanLocal;
+    private User user;
 
     @PostConstruct
     public void init() {
@@ -52,6 +53,16 @@ public class PostUserBean implements PostUserBeanRemote {
     @Remove
     public void remove(){
         postBeanLocal.removePostUserBean(this);
+    }
+    
+    @Override
+    public void setUser(User user){
+        this.user = user;
+    }
+    
+    @Override
+    public User getUser(){
+        return user;
     }
     
 }
