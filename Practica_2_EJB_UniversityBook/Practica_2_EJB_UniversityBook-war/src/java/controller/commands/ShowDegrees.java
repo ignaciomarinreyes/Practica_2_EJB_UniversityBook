@@ -15,7 +15,7 @@ import util.XsltProcessor;
 public class ShowDegrees extends FrontCommand {
 
     private StudyBeanRemote studyBean;
-    
+
     @Override
     public void process() {
         PrintWriter out = null;
@@ -48,6 +48,7 @@ public class ShowDegrees extends FrontCommand {
                 + "</head> "
                 + "<body> "
                 + " <header id=\"title\"><a style=\"color: black; text-decoration: none;\" href=\"MainFrame.jsp\">UniversityBook</a></header>"
+                + menuAdmin()
                 + " <div id='centerSpace'>";
     }
 
@@ -55,6 +56,36 @@ public class ShowDegrees extends FrontCommand {
         return "</div>"
                 + "</body> "
                 + "</html>";
+    }
+
+    private String menuAdmin() {
+        String result = "<div id='menu'>"
+                + "<form action='FrontController' method='GET' style='float: right; margin-right: 10px;'>"
+                + "<input type='hidden' name='command' value='Logout'>"
+                + "<input value='Cerrar Sesión' type='submit'>"
+                + "</form> "
+                + "<form action='FrontController' style='float: right; margin-right: 10px;'>"
+                + "<input type='hidden' name='command' value='ShowPostsFollowedSubject'> "
+                + "<input value='Inicio' type='submit'>"
+                + "</form>  "
+                + "<form action='FrontController' style='float: left; margin-right: 10px;'>"
+                + "<input type='hidden' name='command' value='ShowUniversities'>        "
+                + "<input value='Universities' type='submit'>"
+                + "</form>"
+                + "<form action='FrontController' style='float: left; margin-right: 10px;'>"
+                + "<input type='hidden' name='command' value='ShowDegrees'>"
+                + "<input value='Degrees' type='submit'>"
+                + "</form>"
+                + "<form action='FrontController' style='float: left; margin-right: 10px;'>"
+                + "<input type='hidden' name='command' value='ShowUsers'>"
+                + "<input value='Users' type='submit'>"
+                + "</form>"
+                + "<form action='FrontController' style='float: left; margin-right: 10px;'>"
+                + "<input type='hidden' name='command' value='ShowSubjects'>"
+                + "<input value='Subjects' type='submit'>"
+                + "</form>"
+                + "</div>";
+        return result;
     }
 
 }
