@@ -14,5 +14,9 @@
     <form action='FrontController' style='float: left; margin-right: 10px;'>
         <input type='hidden' name='command' value='ShowDegrees'>        
         <input value='Degrees' type='submit'>
-    </form>  
+    </form>
+    <form action='FrontController' style='float: left; margin-right: 10px;'>
+        <input type='hidden' name='command' value='ShowUsers'>        
+        <input value='Users' type='submit'>
+    </form> 
 </div>
