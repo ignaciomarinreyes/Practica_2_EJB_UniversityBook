@@ -2,7 +2,7 @@ package controller.commands;
 
 import components.PostBeanLocalLocal;
 import components.PostUserBeanRemote;
-import components.SubjectDegreeUniversityRemote;
+import components.StudyBeanRemote;
 import components.UserBeanRemote;
 import components.UserRolRemote;
 import entities.Post;
@@ -17,16 +17,16 @@ import javax.naming.NamingException;
 
 public class ShowSubjects extends FrontCommand {
 
-    private SubjectDegreeUniversityRemote subjectDegreeUniversity;
+    private StudyBeanRemote studyBeanRemote;
         
     @Override
     public void process() {  
         try {
-            subjectDegreeUniversity = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/SubjectDegreeUniversity!components.SubjectDegreeUniversityRemote");
+            studyBeanRemote = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StudyBean!components.StudyBeanRemote");
         } catch (NamingException ex) {
             ex.printStackTrace();
         }
-        request.setAttribute("subjects", subjectDegreeUniversity.getSubjectGroupByUniversity());
+        request.setAttribute("subjects", studyBeanRemote.getSubjects());
         forward("/ShowSubjects.jsp");
     }
 

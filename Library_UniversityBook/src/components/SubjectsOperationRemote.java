@@ -5,8 +5,6 @@
  */
 package components;
 
-import entities.Subject;
-import java.util.ArrayList;
 import javax.ejb.Remote;
 
 /**
@@ -14,9 +12,8 @@ import javax.ejb.Remote;
  * @author ignacio
  */
 @Remote
-public interface SubjectDegreeUniversityRemote {
+public interface SubjectsOperationRemote {
 
-    java.util.HashMap<String, ArrayList<Subject>> getSubjectGroupByUniversity();
-   
+    int[] getNumberSubjectsByCourse();
     
 }

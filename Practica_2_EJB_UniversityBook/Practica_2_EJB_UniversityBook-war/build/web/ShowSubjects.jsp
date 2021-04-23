@@ -1,23 +1,24 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Set"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="entities.Subject"%>
 <%@page import="java.util.List"%>
 <%@page import="entities.User"%>
 <%@page import="entities.Comment"%>
 <%@page import="java.time.LocalDate"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="entities.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%!
-    public static String printTable(ArrayList<Subject> subjects) {
+    public static String printTable(Set<User> students) {
         String result = "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Asignatura</td><td>Grado</td></tr>";
-        for(Subject subject: subjects){
+        result += "<tr><td>ID</td><td>Nombre</td><td>Apellido</td></tr>";
+        for(User student: students){
         result += "<tr>" 
-                +  "<td>" + subject.getId() +"</td>"
-                +  "<td>" + subject.getName() +"</td>"
-                +  "<td>" + subject.getDegree().getName() +"</td>"
+                +  "<td>" + student.getId() +"</td>"
+                +  "<td>" + student.getName() +"</td>"
+                +  "<td>" + student.getSurname() +"</td>"
                 + "</tr>";
         }
         result += "</table>";
@@ -36,14 +37,11 @@
         <%@ include file="MenuAdmin.jsp"%>    
         <div id="centerSpace">
             <%  
-                HashMap<String, ArrayList<Subject>> parameter = (HashMap<String, ArrayList<Subject>>) request.getAttribute("subjects");               
-                for(ArrayList<Subject> subjects : parameter.values()){
-                                    if(subjects.size() > 0){
-                                        out.println("<h1>"+ subjects.get(0).getUniversity().getName() + "</h1>"); 
-                                        out.println(printTable(subjects));
-                                    }
+                ArrayList<Subject> subjects = (ArrayList<Subject>) request.getAttribute("subjects");
+                for(Subject subject : subjects){
+                    out.println("<h1>"+ subject.getUniversity().getName() + ":" + subject.getDegree().getName() + ":" + subject.getName() + "</h1>"); 
+                    out.println(printTable(subject.getStudents()));
                 }
-
             %>
         </div>
         <%@ include file="Footer.jsp"%> 
