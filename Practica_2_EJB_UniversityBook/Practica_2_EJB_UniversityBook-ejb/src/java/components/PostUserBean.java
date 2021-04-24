@@ -22,6 +22,7 @@ public class PostUserBean implements PostUserBeanRemote {
     private ArrayList<Post> myPosts;
     private AllStatefulBeanLocal allStatefulBean;
     private User user;
+    private StatisticBeanRemote statisticBean;
     private LogBeanRemote logBean;
 
     @PostConstruct
@@ -29,42 +30,56 @@ public class PostUserBean implements PostUserBeanRemote {
         myPosts = new ArrayList<Post>();
         try {      
             allStatefulBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/AllStatefulBean!components.AllStatefulBeanLocal");
+            statisticBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StatisticBean!components.StatisticBeanRemote");
             logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");
         } catch (NamingException ex) {
             ex.printStackTrace();
         }
         allStatefulBean.addPostUserBean(this);
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::init::Llamada al PostConstruct");
     }
       
     @Override
     public ArrayList<Post> getMyPosts() {
-        //logBean.writeLogEJBInfo("PostUserBean::getMyPosts::Obtenidos mis posts");
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());     
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::getMyPosts::Obtiene mis posts");
         return myPosts;
     }
 
     @Override
     public void addPost(Post post) {  
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::addPost::Añade un post");
         myPosts.add(post);
     }
     
     @Override
     public void addDefaultMyPosts(User user) {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() +  "::addDefaultMyPosts::Añade mis post por defecto");
         myPosts.addAll(Data.getPostsOfUser(user));
     }  
   
     @Override
     @Remove
     public void remove(){
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() +  "::remove::Se borra el postUserBean");
         allStatefulBean.removePostUserBean(this);
     }
     
     @Override
     public void setUser(User user){
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::setUser::Establece el usuario");
         this.user = user;
     }
     
     @Override
     public User getUser(){
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::getUser::Obtiene el usuario");
         return user;
     }
     
