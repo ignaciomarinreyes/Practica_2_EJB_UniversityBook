@@ -15,7 +15,7 @@
             <form action='FrontController' method='POST'>
                 <div style="padding: 10px;">
                     <span>Nombre: </span>
-                    <input type='text' name='nickname' value='ignacio'> 
+                    <input type='text' name='nickname' value='admin'> 
                 </div>  
                 <div style="padding: 10px;">
                     <span>Contraseña: </span>

@@ -22,5 +22,10 @@
         <form action='FrontController' style='float: left; margin-right: 10px;'>
         <input type='hidden' name='command' value='ShowSubjects'>        
         <input value='Subjects' type='submit'>
+    </form>
+        </form>
+        <form action='FrontController' style='float: left; margin-right: 10px;'>
+        <input type='hidden' name='command' value='ShowCourses'>        
+        <input value='Courses' type='submit'>
     </form> 
 </div>
