@@ -31,5 +31,10 @@ public interface PostUserBeanRemote {
     void setUser(User user);
     
     User getUser();
+
+    void programPost(int miliseconds, String title, User user, LocalDate date, String content, String pathImage, int idSubject);
+
+    void addPost(Post post);
+    
     
 }

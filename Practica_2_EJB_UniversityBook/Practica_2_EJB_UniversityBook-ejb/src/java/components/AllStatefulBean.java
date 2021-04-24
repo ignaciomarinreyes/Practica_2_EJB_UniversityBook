@@ -9,12 +9,19 @@ import data.Data;
 import entities.Post;
 import entities.Subject;
 import entities.User;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerConfig;
+import javax.ejb.TimerService;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -26,7 +33,10 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
     private ArrayList<FavouriteSubjectsBean> favouriteSubjects;
     private StatisticBeanRemote statisticBean;
     private LogBeanRemote logBean;
-
+    @Resource
+    TimerService timerPublishPost;
+    private PostUserBean postUserBeanChoosen;
+    private Post programmedPost;
 
     @PostConstruct
     public void init() {
@@ -41,6 +51,25 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
         postUserBeans = new ArrayList<PostUserBean>();
         favouriteSubjects = new ArrayList<FavouriteSubjectsBean>();
         Data.loadDefaultData();
+    }
+
+    @Override
+    public void setTimer(int miliseconds, User user, Post post) {
+        programmedPost = post;
+        for (PostUserBean postUserBean : postUserBeans) {
+            if (postUserBean.getUser().getId() == user.getId()) {
+                postUserBeanChoosen = postUserBean;
+                break;
+            }
+        }
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
+        logBean.writeLogEJBInfo("AllStatefulBean::setTimer::Se establece la cuenta atrás del post programado");
+        timerPublishPost.createSingleActionTimer(miliseconds, new TimerConfig());
+    }
+
+    @Timeout
+    public void timeout(Timer t) {
+        postUserBeanChoosen.addPost(programmedPost);
     }
 
     @Override

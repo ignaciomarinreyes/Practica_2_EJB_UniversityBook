@@ -11,7 +11,7 @@
                 out.println("<span>" + ((Subject) request.getAttribute("subjectChoosen")).getName() + "</span>");
                 out.println("<form action='FrontController' method='GET' style='float: left; margin-right: 10px;'>");
                 out.println("<input type='hidden' name='command' value='AddFavouriteSubject'>");
-                out.println("<input type='hidden' name='idSubject' value='"+ ((Subject) request.getAttribute("subjectChoosen")).getId() +"'>");
+                out.println("<input type='hidden' name='idSubject' value='" + ((Subject) request.getAttribute("subjectChoosen")).getId() + "'>");
                 out.println("<input value='Añadir a Favoritos' type='submit'>");
                 out.println("</form> ");
             } else {
@@ -30,7 +30,7 @@
             out.println("<input type='hidden' name='command' value='ShowFavouriteSubjects'> ");
             if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ShowFavouriteSubjects.jsp")) {
                 out.println("<input value='Asignaturas Favoritas' type='submit' style='background-color: #9BC1E4;'>");
-            }else{
+            } else {
                 out.println("<input value='Asignaturas Favoritas' type='submit'>");
             }
             out.println("</form>");
@@ -57,6 +57,16 @@
                     out.println("<input value='Publicar' type='submit' style='background-color: #9BC1E4;> ");
                 } else {
                     out.println("<input value='Publicar' type='submit'>");
+                }
+                out.println("</form>");
+            }
+            if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ShowPostsSubject.jsp")) {
+                out.println("<form action='ProgramPublish.jsp' style='float: right; margin-right: 10px;'>");
+                out.println("<input type='hidden' id='subjects' name='subject' value='" + request.getParameter("subjects") + "'> ");
+                if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ProgramPublish.jsp")) {
+                    out.println("<input value='Programar publicación' type='submit' style='background-color: #9BC1E4;> ");
+                } else {
+                    out.println("<input value='Programar publicación' type='submit'>");
                 }
                 out.println("</form>");
             }

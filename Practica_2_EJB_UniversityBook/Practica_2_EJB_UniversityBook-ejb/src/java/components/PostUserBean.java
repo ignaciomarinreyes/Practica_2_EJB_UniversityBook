@@ -11,9 +11,11 @@ import entities.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.ejb.TimerService;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -28,6 +30,7 @@ public class PostUserBean implements PostUserBeanRemote {
     private LogBeanRemote logBean;
     @EJB
     private StudyBeanRemote studyBean;
+
 
     @PostConstruct
     public void init() {
@@ -58,6 +61,8 @@ public class PostUserBean implements PostUserBeanRemote {
         myPosts.add(new Post(title, user, date, content, pathImage, studyBean.getSubjectById(idSubject)));
     }
     
+    
+    
     @Override
     public void addDefaultMyPosts(User user) {
         statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
@@ -86,5 +91,21 @@ public class PostUserBean implements PostUserBeanRemote {
         logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::getUser::Obtiene el usuario");
         return user;
     }
+
+    @Override
+    public void programPost(int miliseconds, String title, User user, LocalDate date, String content, String pathImage, int idSubject) {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::programPost::Se programa un post");
+        allStatefulBean.setTimer(miliseconds, user, new Post(title, user, date, content, pathImage, studyBean.getSubjectById(idSubject)));
+    }
+
+    @Override
+    public void addPost(Post post) {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::addPost::Añade un post programado");   
+        myPosts.add(post);
+    }
+    
+    
     
 }

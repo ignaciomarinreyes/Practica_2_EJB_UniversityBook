@@ -34,5 +34,7 @@ public interface AllStatefulBeanLocal {
     void addFavouriteSubjectBean(FavouriteSubjectsBean subject);
 
     FavouriteSubjectsBean getFavouriteSubjectsBean(User user);
+
+    void setTimer(int miliseconds, User user, Post post);
     
 }
