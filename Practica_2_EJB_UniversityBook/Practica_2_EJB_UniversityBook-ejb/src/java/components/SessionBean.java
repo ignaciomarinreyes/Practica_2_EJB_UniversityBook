@@ -41,5 +41,19 @@ public class SessionBean implements SessionBeanRemote {
             return null;
         }
     }
-    
+
+    @Override
+    public int getNumberUserLoggedNow() {
+        return usersLogged.size();
+    }
+
+    @Override
+    public void remove(User user) {
+        for(int i = 0; i < usersLogged.size(); i++){
+            if(usersLogged.get(i).getId() == user.getId()){
+                usersLogged.remove(i);
+            }
+        }
+    }
+  
 }

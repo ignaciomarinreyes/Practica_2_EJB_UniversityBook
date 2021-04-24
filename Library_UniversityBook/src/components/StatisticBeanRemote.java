@@ -5,7 +5,6 @@
  */
 package components;
 
-import entities.User;
 import javax.ejb.Remote;
 
 /**
@@ -13,12 +12,12 @@ import javax.ejb.Remote;
  * @author ignacio
  */
 @Remote
-public interface SessionBeanRemote {
+public interface StatisticBeanRemote {
 
-    User login(String nickName, String password);
+    int getNumberUserHasLogged();
+
+    void increaseNumberUserHasLogged();
 
     int getNumberUserLoggedNow();
-
-    void remove(User user);
     
 }
