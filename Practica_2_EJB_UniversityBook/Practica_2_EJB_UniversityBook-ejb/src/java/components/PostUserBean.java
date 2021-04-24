@@ -22,12 +22,14 @@ public class PostUserBean implements PostUserBeanRemote {
     private ArrayList<Post> myPosts;
     private AllStatefulBeanLocal allStatefulBean;
     private User user;
+    private LogBeanRemote logBean;
 
     @PostConstruct
     public void init() {
         myPosts = new ArrayList<Post>();
         try {      
             allStatefulBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/AllStatefulBean!components.AllStatefulBeanLocal");
+            logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");
         } catch (NamingException ex) {
             ex.printStackTrace();
         }
@@ -36,6 +38,7 @@ public class PostUserBean implements PostUserBeanRemote {
       
     @Override
     public ArrayList<Post> getMyPosts() {
+        //logBean.writeLogEJBInfo("PostUserBean::getMyPosts::Obtenidos mis posts");
         return myPosts;
     }
 
