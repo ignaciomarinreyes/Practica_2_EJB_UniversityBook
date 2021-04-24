@@ -41,7 +41,6 @@ public class SessionBean implements SessionBeanRemote {
         statisticBean.addMapNumberInvokeBean("SessionBean");
         logBean.writeLogEJBInfo("SessionBean::login::Inicia sesión un usuario");
         User user = userBean.getUser(nickName, password);
-        System.out.println("LoginBean::login:: Inicia " +  user.getName() + " " + user.getSurname() + " sesión en la aplicación");
         if (user != null){
             usersLogged.add(user);
             return user;

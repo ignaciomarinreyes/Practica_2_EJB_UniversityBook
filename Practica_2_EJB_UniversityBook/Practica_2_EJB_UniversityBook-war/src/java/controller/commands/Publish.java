@@ -11,9 +11,8 @@ public class Publish extends FrontCommand {
     
     @Override
     public void process() {
-        postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean");
-        //Post post = new Post(request.getParameter("title"), (User) request.getSession().getAttribute("user"), LocalDate.now(), request.getParameter("content"), null, SubjectDAO.findById(Integer.valueOf(request.getParameter("subject"))));
-        //postUserBean.addPost(post);
+        postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean" + ((User) request.getSession().getAttribute("user")).getId());
+        postUserBean.addPost((String) request.getParameter("title"), (User) request.getSession().getAttribute("user"), LocalDate.now(), (String) request.getParameter("content"), null, Integer.valueOf(request.getParameter("subject")));
         request.setAttribute("postsMYUser", postUserBean.getMyPosts());
         forward("/ShowMyPosts.jsp");
     }

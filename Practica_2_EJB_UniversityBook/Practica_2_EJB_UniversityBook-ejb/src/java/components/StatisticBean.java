@@ -15,8 +15,6 @@ public class StatisticBean implements StatisticBeanRemote {
     private SessionBeanRemote sessionBean;
     private int numberUserHasLogged;
     private HashMap<String,Integer> mapNumberInvokeBean;
-    private StatisticBeanRemote statisticBean;
-    private LogBeanRemote logBean;
 
     @PostConstruct
     public void init() {

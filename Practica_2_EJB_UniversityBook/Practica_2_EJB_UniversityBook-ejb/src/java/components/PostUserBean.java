@@ -8,8 +8,10 @@ package components;
 import data.Data;
 import entities.Post;
 import entities.User;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.naming.InitialContext;
@@ -24,6 +26,8 @@ public class PostUserBean implements PostUserBeanRemote {
     private User user;
     private StatisticBeanRemote statisticBean;
     private LogBeanRemote logBean;
+    @EJB
+    private StudyBeanRemote studyBean;
 
     @PostConstruct
     public void init() {
@@ -48,10 +52,10 @@ public class PostUserBean implements PostUserBeanRemote {
     }
 
     @Override
-    public void addPost(Post post) {  
+    public void addPost(String title, User user, LocalDate date, String content, String pathImage, int idSubject) {  
         statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
-        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::addPost::Añade un post");
-        myPosts.add(post);
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::addPost::Añade un post");      
+        myPosts.add(new Post(title, user, date, content, pathImage, studyBean.getSubjectById(idSubject)));
     }
     
     @Override

@@ -8,6 +8,7 @@ package components;
 import entities.Post;
 import entities.Subject;
 import entities.User;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.ejb.Remote;
 import javax.naming.NamingException;
@@ -19,7 +20,7 @@ import javax.naming.NamingException;
 @Remote
 public interface PostUserBeanRemote {
 
-    void addPost(Post post);
+    void addPost(String title, User user, LocalDate date, String content, String pathImage, int idSubject);
 
     void addDefaultMyPosts(User user);
 
