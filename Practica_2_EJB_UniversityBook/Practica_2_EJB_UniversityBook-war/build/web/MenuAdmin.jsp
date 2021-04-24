@@ -35,5 +35,10 @@
         <form action='FrontController' style='float: left; margin-right: 10px;'>
         <input type='hidden' name='command' value='ShowStatistic'>        
         <input value='Estadísticas' type='submit'>
+    </form>
     </form> 
+        <form action='FrontController' style='float: left; margin-right: 10px;'>
+        <input type='hidden' name='command' value='ShowStatefulBean'>        
+        <input value='Statefuls' type='submit'>
+    </form>
 </div>

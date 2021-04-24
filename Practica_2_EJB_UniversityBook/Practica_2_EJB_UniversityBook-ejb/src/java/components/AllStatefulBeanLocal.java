@@ -36,5 +36,9 @@ public interface AllStatefulBeanLocal {
     FavouriteSubjectsBean getFavouriteSubjectsBean(User user);
 
     void setTimer(int miliseconds, User user, Post post);
+
+    java.util.List<PostUserBean> getAllPostUserBean();
+
+    java.util.List<FavouriteSubjectsBean> getAllFavouriteSubjectsBean();
     
 }

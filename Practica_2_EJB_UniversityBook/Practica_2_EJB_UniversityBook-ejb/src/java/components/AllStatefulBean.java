@@ -168,4 +168,15 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
         return null;
     }
 
+    @Override
+    public java.util.List<PostUserBean> getAllPostUserBean() {
+        return postUserBeans;
+    }
+
+    @Override
+    public java.util.List<FavouriteSubjectsBean> getAllFavouriteSubjectsBean() {
+        return favouriteSubjects;
+    }
+    
+    
 }
