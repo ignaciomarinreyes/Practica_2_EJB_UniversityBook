@@ -11,7 +11,7 @@
         <%@ include file="Header.jsp"%>
         <%@ include file="Menu.jsp"%>  
         <h1 style='text-align: center;'>
-            Se ha añadido correctamente
+            La operación se realizó con éxito
         </h1>
         <%@ include file="Footer.jsp"%> 
     </body>

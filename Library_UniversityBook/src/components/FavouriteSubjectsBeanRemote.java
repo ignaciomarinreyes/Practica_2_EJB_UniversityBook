@@ -24,5 +24,7 @@ public interface FavouriteSubjectsBeanRemote {
     void setUser(User user);
 
     User getUser();
+
+    void remove();
     
 }

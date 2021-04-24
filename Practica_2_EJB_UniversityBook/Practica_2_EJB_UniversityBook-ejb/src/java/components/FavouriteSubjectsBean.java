@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -71,7 +72,13 @@ public class FavouriteSubjectsBean implements FavouriteSubjectsBeanRemote {
         logBean.writeLogEJBInfo("FavouriteSubjectsBean_" + this.hashCode() + "::getUser::Obtiene un usuario");
         return this.user;
     }
-    
+
+    @Remove
+    @Override
+    public void remove() {
+        statisticBean.addMapNumberInvokeBean("FavouriteSubjectsBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("FavouriteSubjectsBean_" + this.hashCode() +  "::remove::Se borra el favouriteSubjectsBean");
+    }   
     
 
     

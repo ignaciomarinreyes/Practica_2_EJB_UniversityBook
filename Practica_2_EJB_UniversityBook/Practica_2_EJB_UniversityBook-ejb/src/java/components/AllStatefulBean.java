@@ -170,13 +170,46 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public java.util.List<PostUserBean> getAllPostUserBean() {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
+        logBean.writeLogEJBInfo("AllStatefulBean::getAllPostUserBean::Obtiene todos los postUserBean");
         return postUserBeans;
     }
 
     @Override
     public java.util.List<FavouriteSubjectsBean> getAllFavouriteSubjectsBean() {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
+        logBean.writeLogEJBInfo("AllStatefulBean::getAllFavouriteSubjectsBean::Obtiene todos los favouriteSubjectBean");
         return favouriteSubjects;
     }
-    
+
+    @Override
+    public String removeStateful(int hashCode) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
+        logBean.writeLogEJBInfo("AllStatefulBean::removeStateful::Borra un stateful");
+        String atributteDelete = "";
+        FavouriteSubjectsBean favouriteSubjectsBeanDelete = null;
+        PostUserBean postUserBeanDelete = null;
+        for (FavouriteSubjectsBean favouriteSubjectsBean : favouriteSubjects) {
+            if (favouriteSubjectsBean.hashCode() == hashCode) {
+                atributteDelete = "favouriteSubjectsBean" + favouriteSubjectsBean.getUser().getId();
+                favouriteSubjectsBeanDelete = favouriteSubjectsBean;
+            }
+        }
+        for (PostUserBean postUserBean : postUserBeans) {
+            if (postUserBean.hashCode() == hashCode) {
+                atributteDelete = "postUserBean" + postUserBean.getUser().getId();
+                postUserBeanDelete = postUserBean;
+            }
+        }
+        if (favouriteSubjectsBeanDelete != null) {
+            favouriteSubjects.remove(favouriteSubjectsBeanDelete);
+            favouriteSubjectsBeanDelete.remove();
+        }
+        if (postUserBeanDelete != null) {
+            postUserBeans.remove(postUserBeanDelete);
+            postUserBeanDelete.remove();
+        }
+        return atributteDelete;
+    }
     
 }

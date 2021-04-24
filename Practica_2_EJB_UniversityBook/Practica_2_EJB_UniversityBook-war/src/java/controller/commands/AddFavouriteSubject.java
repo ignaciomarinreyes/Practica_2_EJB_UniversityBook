@@ -20,7 +20,7 @@ public class AddFavouriteSubject extends FrontCommand {
             ex.printStackTrace();
         }
         favouriteSubjectsBean.addFavouriteSubject(studyBean.getSubjectById(Integer.parseInt((String) request.getParameter("idSubject"))));
-        forward("/Add.jsp");
+        forward("/OperationSuccesful.jsp");
     }
 
 }

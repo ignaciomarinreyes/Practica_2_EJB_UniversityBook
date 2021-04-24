@@ -75,7 +75,6 @@ public class PostUserBean implements PostUserBeanRemote {
     public void remove(){
         statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
         logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() +  "::remove::Se borra el postUserBean");
-        allStatefulBean.removePostUserBean(this);
     }
     
     @Override

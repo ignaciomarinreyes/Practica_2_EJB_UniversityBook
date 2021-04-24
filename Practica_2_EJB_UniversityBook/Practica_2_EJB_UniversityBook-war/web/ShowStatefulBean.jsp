@@ -15,26 +15,26 @@
     public static String printTablePostUserBean(AllStatefulBeanLocal allStatefulBeanLocal) {
         String result = "";
         for (PostUserBean postUserBean : allStatefulBeanLocal.getAllPostUserBean()) {
-            result += "<h2>PostUserBean_" + postUserBean.hashCode() + " " + postUserBean.getUser().getName() + "</h2>"
-                    + "<table style='width:100%'><tr><td>Id</td><td>Título</td><td>Asignatura</td></tr>";
+            result += "<span>PostUserBean_" + postUserBean.hashCode() + " " + postUserBean.getUser().getName() + "</span><form action='FrontController' method='GET'><button type='submit'>Eliminar</button><input type='hidden' name='hashCode' value='" + postUserBean.hashCode() +"'><input type='hidden' name='command' value='RemoveStateful'></form>"
+                    + "<table style='width:100%'><tr><td>Id</td><td>Título</td><td>Asignatura</td><td>Asignatura</td></tr>";
             for (Post post : postUserBean.getMyPosts()) {
                 result += "<tr><td>" + post.getId() + "</td><td>" + post.getTitle() + "</td><td>" + post.getSubject().getName() + "</td></tr>";
             }
+            result += "</table>";
         }
-        result += "</table>";
         return result;
     }
 
     public static String printTableFavouriteSubjectsBean(AllStatefulBeanLocal allStatefulBeanLocal) {
         String result = "";
         for (FavouriteSubjectsBean favouriteSubjectsBean : allStatefulBeanLocal.getAllFavouriteSubjectsBean()) {
-            result += "<h2>PostUserBean_" + favouriteSubjectsBean.hashCode() + " " + favouriteSubjectsBean.getUser().getName() + "</h2>"
+            result += "<span>PostUserBean_" + favouriteSubjectsBean.hashCode() + " " + favouriteSubjectsBean.getUser().getName() + "</span><form action='FrontController' method='GET'><button type='submit'>Eliminar</button><input type='hidden' name='hashCode' value='" + favouriteSubjectsBean.hashCode() +"'><input type='hidden' name='command' value='RemoveStateful'></form>"
                     + "<table style='width:100%'><tr><td>Id</td><td>Nombre</td></tr>";
             for (Subject subject : favouriteSubjectsBean.getFavouritesSubjects()) {
                 result += "<tr><td>" + subject.getId() + "</td><td>" + subject.getName() + "</td></tr>";
             }
-        }
-        result += "</table>";
+            result += "</table>";
+        }        
         return result;
     }
 %>
@@ -48,7 +48,8 @@
         <%@ include file="Header.jsp"%>    
         <%@ include file="MenuAdmin.jsp"%>    
         <div id="centerSpace">
-            <%                out.println("<h1>PostUserBean</h1>");
+            <%                
+                out.println("<h1>PostUserBean</h1>");
                 out.println(printTablePostUserBean((AllStatefulBeanLocal) request.getAttribute("allStatefulBean")));
                 out.println("<h1>FavouriteSubjectsBean</h1>");
                 out.println(printTableFavouriteSubjectsBean((AllStatefulBeanLocal) request.getAttribute("allStatefulBean")));
@@ -57,3 +58,4 @@
         <%@ include file="Footer.jsp"%> 
     </body>
 </html>
+

@@ -40,5 +40,7 @@ public interface AllStatefulBeanLocal {
     java.util.List<PostUserBean> getAllPostUserBean();
 
     java.util.List<FavouriteSubjectsBean> getAllFavouriteSubjectsBean();
+
+    String removeStateful(int hashCode);
     
 }
