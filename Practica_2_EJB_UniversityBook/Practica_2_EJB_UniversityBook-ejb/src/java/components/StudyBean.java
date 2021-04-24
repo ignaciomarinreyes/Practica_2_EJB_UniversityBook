@@ -46,5 +46,16 @@ public class StudyBean implements StudyBeanRemote {
     public ArrayList<Subject> getSubjects() {
         return subjects;
     }  
+
+    @Override
+    public Subject getSubjectById(int idSubject) {
+        for(Subject subject :subjects){
+            if(subject.getId() == idSubject){
+                return subject;
+            }
+        }
+        return null;
+    }
   
+    
 }

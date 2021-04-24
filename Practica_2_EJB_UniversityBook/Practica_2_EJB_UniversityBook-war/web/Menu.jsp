@@ -1,3 +1,4 @@
+<%@page import="entities.Subject"%>
 <%@page import="entities.Rol"%>
 <%@page import="entities.User"%>
 <div id="menu">
@@ -6,10 +7,12 @@
         <%
             if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ShowPostsSubject.jsp")) {
                 out.println("<input value='Buscar' style='background-color: #9BC1E4;' type='submit'>");
+                out.println("<span>" + ((Subject) request.getAttribute("subjectChoosen")).getName() + "</span>");
+                out.println("</form>");
             } else {
                 out.println("<input value='Buscar' style='background-color: none;' type='submit'>");
+                out.println("</form>");
             }
-            out.println("</form>");
             out.println("<form action='FrontController' method='GET' style='float: right; margin-right: 10px;'>");
             out.println("<input type='hidden' name='command' value='Logout'> ");
             out.println("<input value='Cerrar Sesión' type='submit'>");

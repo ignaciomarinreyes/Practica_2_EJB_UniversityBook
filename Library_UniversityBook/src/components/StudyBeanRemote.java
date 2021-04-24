@@ -23,5 +23,7 @@ public interface StudyBeanRemote {
     ArrayList<Degree> getDegrees();
 
     ArrayList<Subject> getSubjects();
+
+    Subject getSubjectById(int idSubject);
     
 }
