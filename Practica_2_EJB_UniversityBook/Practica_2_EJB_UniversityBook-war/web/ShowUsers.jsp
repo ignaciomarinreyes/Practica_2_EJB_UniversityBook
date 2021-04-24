@@ -11,10 +11,9 @@
     public static String printTable(List<User> usersTeacher, List<User> usersStudent, List<User> usersAdmin) {
         String result = "<h1>Teacher</h1>" 
         + "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
+        result += "<tr><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
         for(User user: usersTeacher){
         result += "<tr>" 
-                +  "<td>" + user.getId() +"</td>"
                 +  "<td>" + user.getName() +"</td>"
                 +  "<td>" + user.getSurname() +"</td>"
                 +  "<td>" + user.getNickname() +"</td>"
@@ -25,10 +24,9 @@
 
         result += "<h1>Student</h1>" 
         + "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
+        result += "<tr><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
         for(User user: usersStudent){
         result += "<tr>" 
-                +  "<td>" + user.getId() +"</td>"
                 +  "<td>" + user.getName() +"</td>"
                 +  "<td>" + user.getSurname() +"</td>"
                 +  "<td>" + user.getNickname() +"</td>"
@@ -39,10 +37,9 @@
 
         result += "<h1>Admin</h1>" 
         + "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
+        result += "<tr><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
         for(User user: usersAdmin){
         result += "<tr>" 
-                +  "<td>" + user.getId() +"</td>"
                 +  "<td>" + user.getName() +"</td>"
                 +  "<td>" + user.getSurname() +"</td>"
                 +  "<td>" + user.getNickname() +"</td>"

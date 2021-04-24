@@ -1,3 +1,4 @@
+<%@page import="java.util.HashSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashMap"%>
@@ -11,7 +12,7 @@
 <!DOCTYPE html>
 
 <%!
-    public static String printTable(ArrayList<Subject> subjects) {
+    public static String printTable(HashSet<Subject> subjects) {
         String result = "<table style='width:100%'>"; 
         result += "<tr><td>ID</td><td>Nombre</td><td>Curso</td></tr>";
         for(Subject subject: subjects){
@@ -37,8 +38,8 @@
         <%@ include file="Menu.jsp"%>    
         <div id="centerSpace">
             <%  
-                ArrayList<Subject> subjects = (ArrayList<Subject>) request.getAttribute("favouriteSubjects");
-                out.println(printTable(subjects));
+                HashSet<Subject> subjectsList = (HashSet<Subject>) request.getAttribute("favouriteSubjects");
+                out.println(printTable(subjectsList));
             %>
         </div>
         <%@ include file="Footer.jsp"%> 

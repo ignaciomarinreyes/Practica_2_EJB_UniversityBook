@@ -1,20 +1,7 @@
 package controller.commands;
 
 import components.FavouriteSubjectsBeanRemote;
-import components.PostUserBeanRemote;
-import components.StudyBeanRemote;
-import components.UserBeanRemote;
-import components.UserRolRemote;
-import entities.Post;
-import entities.Rol;
 import entities.User;
-import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import components.AllStatefulBeanLocal;
 
 public class ShowFavouriteSubjects extends FrontCommand {
 
@@ -22,13 +9,10 @@ public class ShowFavouriteSubjects extends FrontCommand {
         
     @Override
     public void process() {  
-        try {
-            favouriteSubjectsBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/FavouriteSubjectsBean!components.FavouriteSubjectsBeanRemote");
-        } catch (NamingException ex) {
-            ex.printStackTrace();
-        }
+        favouriteSubjectsBean = (FavouriteSubjectsBeanRemote) request.getSession().getAttribute("favouriteSubjectsBean" + ((User) request.getSession().getAttribute("user")).getId());
         request.setAttribute("favouriteSubjects", favouriteSubjectsBean.getFavouritesSubjects());
         forward("/ShowFavouriteSubjects.jsp");
     }
 
 }
+

@@ -11,7 +11,7 @@
                 out.println("<span>" + ((Subject) request.getAttribute("subjectChoosen")).getName() + "</span>");
                 out.println("<form action='FrontController' method='GET' style='float: left; margin-right: 10px;'>");
                 out.println("<input type='hidden' name='command' value='AddFavouriteSubject'>");
-                request.setAttribute("subjectChoosen", ((Subject) request.getAttribute("subjectChoosen")));
+                out.println("<input type='hidden' name='idSubject' value='"+ ((Subject) request.getAttribute("subjectChoosen")).getId() +"'>");
                 out.println("<input value='Añadir a Favoritos' type='submit'>");
                 out.println("</form> ");
             } else {

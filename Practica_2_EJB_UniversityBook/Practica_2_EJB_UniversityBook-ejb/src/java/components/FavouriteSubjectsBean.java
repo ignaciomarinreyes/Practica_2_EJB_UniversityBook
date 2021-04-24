@@ -7,9 +7,14 @@ package components;
 
 import data.Data;
 import entities.Subject;
+import entities.User;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateful;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  *
@@ -18,11 +23,19 @@ import javax.ejb.Stateful;
 @Stateful
 public class FavouriteSubjectsBean implements FavouriteSubjectsBeanRemote {
 
-    ArrayList<Subject> subjects;
+    private HashSet<Subject> subjects;
+    private AllStatefulBeanLocal allStatefulBean;
+    private User user;
     
     @PostConstruct
     public void init() {
-        subjects = new ArrayList<Subject>();
+        subjects = new HashSet<Subject>();
+        try {      
+            allStatefulBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/AllStatefulBean!components.AllStatefulBeanLocal");
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        }
+        allStatefulBean.addFavouriteSubjectBean(this);
     }
 
     @Override
@@ -31,9 +44,21 @@ public class FavouriteSubjectsBean implements FavouriteSubjectsBeanRemote {
     }
 
     @Override
-    public ArrayList<Subject> getFavouritesSubjects() {
+    public HashSet<Subject> getFavouritesSubjects() {
         return subjects;
     }
- 
+
+    @Override
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public User getUser() {
+        return this.user;
+    }
+    
+    
+
     
 }

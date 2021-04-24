@@ -19,10 +19,12 @@ import javax.ejb.Startup;
 public class AllStatefulBean implements AllStatefulBeanLocal {
 
     private ArrayList<PostUserBean> postUserBeans;
+    private ArrayList<FavouriteSubjectsBean> favouriteSubjects;
 
     @PostConstruct
     public void init() {
         postUserBeans = new ArrayList<PostUserBean>();
+        favouriteSubjects = new ArrayList<FavouriteSubjectsBean>();
         Data.loadDefaultData();
     }
 
@@ -30,7 +32,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
     public void addPostUserBean(PostUserBean postUserBean) {
         postUserBeans.add(postUserBean);
     }
-    
+
     @Override
     public void removePostUserBean(PostUserBean postUserBean) {
         postUserBeans.remove(postUserBean);
@@ -73,7 +75,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
     @Override
     public ArrayList<Post> getPosts() {
         ArrayList<Post> postsList = new ArrayList<Post>();
-        for(PostUserBean postUserBean: postUserBeans){
+        for (PostUserBean postUserBean : postUserBeans) {
             postsList.addAll(postUserBean.getMyPosts());
         }
         return postsList;
@@ -81,9 +83,24 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public PostUserBean getPostUserBean(User user) {
-        for(PostUserBean postUserBean: postUserBeans){
-            if(postUserBean.getUser().getId() == user.getId()){
+        for (PostUserBean postUserBean : postUserBeans) {
+            if (postUserBean.getUser().getId() == user.getId()) {
                 return postUserBean;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void addFavouriteSubjectBean(FavouriteSubjectsBean favouriteSubjectsBean) {
+        favouriteSubjects.add(favouriteSubjectsBean);
+    }
+
+    @Override
+    public FavouriteSubjectsBean getFavouriteSubjectsBean(User user) {
+        for (FavouriteSubjectsBean favouriteSubjectsBean : favouriteSubjects) {
+            if (favouriteSubjectsBean.getUser().getId() == user.getId()) {
+                return favouriteSubjectsBean;
             }
         }
         return null;

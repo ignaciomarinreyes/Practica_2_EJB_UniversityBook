@@ -6,7 +6,8 @@
 package components;
 
 import entities.Subject;
-import java.util.ArrayList;
+import entities.User;
+import java.util.HashSet;
 import javax.ejb.Remote;
 
 /**
@@ -18,6 +19,10 @@ public interface FavouriteSubjectsBeanRemote {
 
     void addFavouriteSubject(Subject subject);
 
-    ArrayList<Subject> getFavouritesSubjects();
+    HashSet<Subject> getFavouritesSubjects();
+
+    void setUser(User user);
+
+    User getUser();
     
 }
