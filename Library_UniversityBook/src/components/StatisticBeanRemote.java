@@ -19,5 +19,9 @@ public interface StatisticBeanRemote {
     void increaseNumberUserHasLogged();
 
     int getNumberUserLoggedNow();
+
+    void addMapNumberInvokeBean(String key);
+
+    java.util.HashMap<String, Integer> getMapNumberInvokeBean();
     
 }

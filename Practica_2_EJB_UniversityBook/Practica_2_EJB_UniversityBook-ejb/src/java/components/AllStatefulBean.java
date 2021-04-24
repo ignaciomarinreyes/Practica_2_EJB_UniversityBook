@@ -10,9 +10,13 @@ import entities.Post;
 import entities.Subject;
 import entities.User;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 @Startup
 @Singleton
@@ -20,9 +24,16 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     private ArrayList<PostUserBean> postUserBeans;
     private ArrayList<FavouriteSubjectsBean> favouriteSubjects;
+    private StatisticBeanRemote statisticBean;
 
     @PostConstruct
     public void init() {
+        try {
+            statisticBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StatisticBean!components.StatisticBeanRemote");
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        }
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         postUserBeans = new ArrayList<PostUserBean>();
         favouriteSubjects = new ArrayList<FavouriteSubjectsBean>();
         Data.loadDefaultData();
@@ -30,16 +41,19 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public void addPostUserBean(PostUserBean postUserBean) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         postUserBeans.add(postUserBean);
     }
 
     @Override
     public void removePostUserBean(PostUserBean postUserBean) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         postUserBeans.remove(postUserBean);
     }
 
     @Override
     public ArrayList<Post> getPostsFollowedSubjectByUser(User user) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         ArrayList<Post> postsList = new ArrayList<Post>();
         for (Post post : getPosts()) {
             for (Subject subjectFollowed : user.getSubjects()) {
@@ -53,6 +67,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public void addLikePost(User user, int idPost) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         for (Post post : getPosts()) {
             if (post.getId() == idPost) {
                 post.addLike(user);
@@ -63,6 +78,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public java.util.ArrayList<Post> getPostsSubject(int idUniversity, int idDegree, int idSubject) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         ArrayList<Post> postsList = new ArrayList<Post>();
         for (Post post : getPosts()) {
             if (post.getSubject().getId() == idSubject && post.getSubject().getDegree().getId() == idDegree && post.getSubject().getUniversity().getId() == idUniversity) {
@@ -74,6 +90,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public ArrayList<Post> getPosts() {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         ArrayList<Post> postsList = new ArrayList<Post>();
         for (PostUserBean postUserBean : postUserBeans) {
             postsList.addAll(postUserBean.getMyPosts());
@@ -83,6 +100,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public PostUserBean getPostUserBean(User user) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         for (PostUserBean postUserBean : postUserBeans) {
             if (postUserBean.getUser().getId() == user.getId()) {
                 return postUserBean;
@@ -93,11 +111,13 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Override
     public void addFavouriteSubjectBean(FavouriteSubjectsBean favouriteSubjectsBean) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         favouriteSubjects.add(favouriteSubjectsBean);
     }
 
     @Override
     public FavouriteSubjectsBean getFavouriteSubjectsBean(User user) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
         for (FavouriteSubjectsBean favouriteSubjectsBean : favouriteSubjects) {
             if (favouriteSubjectsBean.getUser().getId() == user.getId()) {
                 return favouriteSubjectsBean;

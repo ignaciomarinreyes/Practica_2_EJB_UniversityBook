@@ -19,6 +19,7 @@ public class ShowStatistic extends FrontCommand {
         }
         request.setAttribute("numberUserHasLogged", statisticBean.getNumberUserHasLogged());
         request.setAttribute("numberUserLoggedNow", statisticBean.getNumberUserLoggedNow());
+        request.setAttribute("mapNumberInvokeBean", statisticBean.getMapNumberInvokeBean());
         forward("/Statistic.jsp");
     }
 
