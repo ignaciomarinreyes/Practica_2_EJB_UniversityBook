@@ -5,6 +5,9 @@
  */
 package components;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -34,4 +37,29 @@ public class LogBean implements LogBeanRemote {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String getLogEJB() {
+        String result = "";
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(new File("/Users/ignacio/GlassFish_Server/glassfish/domains/domain1/config/logEJB.txt")));
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                result += linea + "\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != br) {
+                    br.close();
+                }
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+        }
+        return result;
+    }
+
 }

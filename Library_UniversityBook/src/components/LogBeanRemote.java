@@ -15,5 +15,7 @@ import javax.ejb.Remote;
 public interface LogBeanRemote {
 
     void writeLogEJBInfo(String mensaje);
+
+    String getLogEJB();
     
 }

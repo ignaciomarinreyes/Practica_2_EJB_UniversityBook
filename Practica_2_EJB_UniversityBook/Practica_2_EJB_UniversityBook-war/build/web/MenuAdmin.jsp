@@ -19,13 +19,16 @@
         <input type='hidden' name='command' value='ShowUsers'>        
         <input value='Users' type='submit'>
     </form>
-        <form action='FrontController' style='float: left; margin-right: 10px;'>
+    <form action='FrontController' style='float: left; margin-right: 10px;'>
         <input type='hidden' name='command' value='ShowSubjects'>        
         <input value='Subjects' type='submit'>
     </form>
-        </form>
-        <form action='FrontController' style='float: left; margin-right: 10px;'>
+    <form action='FrontController' style='float: left; margin-right: 10px;'>
         <input type='hidden' name='command' value='ShowCourses'>        
         <input value='Courses' type='submit'>
+    </form> 
+        <form action='FrontController' style='float: left; margin-right: 10px;'>
+        <input type='hidden' name='command' value='ShowLogEJB'>        
+        <input value='Log EJB' type='submit'>
     </form> 
 </div>
