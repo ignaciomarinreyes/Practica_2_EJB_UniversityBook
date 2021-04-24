@@ -1,7 +1,6 @@
 package controller.commands;
 
 import components.FavouriteSubjectsBeanRemote;
-import components.PostBeanLocalLocal;
 import components.PostUserBeanRemote;
 import components.StudyBeanRemote;
 import components.UserBeanRemote;
@@ -15,6 +14,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import components.AllStatefulBeanLocal;
 
 public class ShowFavouriteSubjects extends FrontCommand {
 

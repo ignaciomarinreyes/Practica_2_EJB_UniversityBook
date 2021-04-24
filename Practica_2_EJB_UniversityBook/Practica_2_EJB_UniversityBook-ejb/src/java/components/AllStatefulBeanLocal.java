@@ -15,7 +15,7 @@ import javax.ejb.Local;
  * @author ignacio
  */
 @Local
-public interface PostBeanLocalLocal {
+public interface AllStatefulBeanLocal {
 
     void addPostUserBean(PostUserBean postUserBean);
     

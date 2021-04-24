@@ -16,7 +16,7 @@ import javax.ejb.Startup;
 
 @Startup
 @Singleton
-public class PostBeanLocal implements PostBeanLocalLocal {
+public class AllStatefulBean implements AllStatefulBeanLocal {
 
     private ArrayList<PostUserBean> postUserBeans;
 

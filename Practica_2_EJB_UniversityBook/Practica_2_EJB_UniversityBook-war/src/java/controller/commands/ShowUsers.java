@@ -1,6 +1,5 @@
 package controller.commands;
 
-import components.PostBeanLocalLocal;
 import components.PostUserBeanRemote;
 import components.UserBeanRemote;
 import components.UserRolRemote;
@@ -13,6 +12,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import components.AllStatefulBeanLocal;
 
 public class ShowUsers extends FrontCommand {
 

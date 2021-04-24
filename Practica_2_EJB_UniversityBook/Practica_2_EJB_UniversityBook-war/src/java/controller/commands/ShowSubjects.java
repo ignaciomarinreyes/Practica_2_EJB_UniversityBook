@@ -1,6 +1,5 @@
 package controller.commands;
 
-import components.PostBeanLocalLocal;
 import components.PostUserBeanRemote;
 import components.StudyBeanRemote;
 import components.UserBeanRemote;
@@ -15,7 +14,7 @@ import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class ShowSubjects extends FrontCommand {
+public class ShowSubjects extends FrontCommand{
 
     private StudyBeanRemote studyBeanRemote;
         

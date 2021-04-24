@@ -20,18 +20,18 @@ import javax.naming.NamingException;
 public class PostUserBean implements PostUserBeanRemote {
 
     private ArrayList<Post> myPosts;
-    private PostBeanLocalLocal postBeanLocal;
+    private AllStatefulBeanLocal allStatefulBean;
     private User user;
 
     @PostConstruct
     public void init() {
         myPosts = new ArrayList<Post>();
         try {      
-            postBeanLocal = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/PostBeanLocal!components.PostBeanLocalLocal");
+            allStatefulBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/AllStatefulBean!components.AllStatefulBeanLocal");
         } catch (NamingException ex) {
             ex.printStackTrace();
         }
-        postBeanLocal.addPostUserBean(this);
+        allStatefulBean.addPostUserBean(this);
     }
       
     @Override
@@ -52,7 +52,7 @@ public class PostUserBean implements PostUserBeanRemote {
     @Override
     @Remove
     public void remove(){
-        postBeanLocal.removePostUserBean(this);
+        allStatefulBean.removePostUserBean(this);
     }
     
     @Override
