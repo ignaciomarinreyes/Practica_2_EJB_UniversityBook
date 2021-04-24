@@ -8,7 +8,8 @@
         <title>Unknow</title>
     </head>
     <body>
-        <%@ include file="Header.jsp"%>     
+        <%@ include file="Header.jsp"%>  
+        <%@ include file="Menu.jsp"%>  
         <h1 style='text-align: center;'>
             Mensaje de error
         </h1>

@@ -7,8 +7,13 @@
         <%
             if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ShowPostsSubject.jsp")) {
                 out.println("<input value='Buscar' style='background-color: #9BC1E4;' type='submit'>");
-                out.println("<span>" + ((Subject) request.getAttribute("subjectChoosen")).getName() + "</span>");
                 out.println("</form>");
+                out.println("<span>" + ((Subject) request.getAttribute("subjectChoosen")).getName() + "</span>");
+                out.println("<form action='FrontController' method='GET' style='float: left; margin-right: 10px;'>");
+                out.println("<input type='hidden' name='command' value='AddFavouriteSubject'>");
+                request.setAttribute("subjectChoosen", ((Subject) request.getAttribute("subjectChoosen")));
+                out.println("<input value='Añadir a Favoritos' type='submit'>");
+                out.println("</form> ");
             } else {
                 out.println("<input value='Buscar' style='background-color: none;' type='submit'>");
                 out.println("</form>");
@@ -20,6 +25,14 @@
             out.println("<form action='FrontController' style='float: right; margin-right: 10px;'> ");
             out.println("<input type='hidden' name='command' value='Configuracion'> ");
             out.println("<input value='Configuración' type='submit'>");
+            out.println("</form>");
+            out.println("<form action='FrontController' style='float: right; margin-right: 10px;'> ");
+            out.println("<input type='hidden' name='command' value='ShowFavouriteSubjects'> ");
+            if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ShowFavouriteSubjects.jsp")) {
+                out.println("<input value='Asignaturas Favoritas' type='submit' style='background-color: #9BC1E4;'>");
+            }else{
+                out.println("<input value='Asignaturas Favoritas' type='submit'>");
+            }
             out.println("</form>");
             out.println("<form action='FrontController' style='float: right; margin-right: 10px;'>");
             if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ShowMyPosts.jsp")) {
