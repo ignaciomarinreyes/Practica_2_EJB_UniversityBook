@@ -151,6 +151,14 @@ table, th, td {
     border: 1px solid black;
 }
 
+textarea {
+    margin: 5px;
+}
+
+input[type="text"] {
+    margin: 5px;
+}
+
 
 
 
