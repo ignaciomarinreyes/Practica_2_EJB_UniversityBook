@@ -27,6 +27,7 @@ input[type=submit]{
     padding-top: 10px;
     padding-bottom: 10px; 
     height: 30px;
+    margin-bottom: 20px;
 }
 
 #centerSpace{
@@ -111,6 +112,7 @@ input[type=submit]{
     padding-left: 20px;
     background-color: #9BC1E4;
     border: 1px solid black;
+    padding: 5px;
 }
 
 .formSearch select{
@@ -129,7 +131,25 @@ input[type=submit]{
     padding-bottom: 0px;
 }
 
+span {
+    padding: 6px;
+}
 
+th {
+    background-color: #9BC1E4;
+}
+
+th, td {
+    padding: 4px;
+}
+
+table {
+    margin: 6px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
 
 
 

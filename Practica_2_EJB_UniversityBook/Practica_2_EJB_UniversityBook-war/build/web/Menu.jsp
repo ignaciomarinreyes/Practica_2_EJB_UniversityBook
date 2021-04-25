@@ -8,11 +8,11 @@
             if (request.getRequestURI().equals("/Practica_2_EJB_UniversityBook-war/ShowPostsSubject.jsp")) {
                 out.println("<input value='Buscar' style='background-color: #9BC1E4;' type='submit'>");
                 out.println("</form>");
-                out.println("<span>" + ((Subject) request.getAttribute("subjectChoosen")).getName() + "</span>");
+                out.println("<span style='display: inline-block;'>" + ((Subject) request.getAttribute("subjectChoosen")).getName() + "</span>");
                 out.println("<form action='FrontController' method='GET' style='float: left; margin-right: 10px;'>");
                 out.println("<input type='hidden' name='command' value='AddFavouriteSubject'>");
                 out.println("<input type='hidden' name='idSubject' value='" + ((Subject) request.getAttribute("subjectChoosen")).getId() + "'>");
-                out.println("<input value='Añadir a Favoritos' type='submit'>");
+                out.println("<input value='Añadir a Favoritos' type='submit' style='margin-left: 7px;'>");
                 out.println("</form> ");
             } else {
                 out.println("<input value='Buscar' style='background-color: none;' type='submit'>");

@@ -14,7 +14,7 @@
 <%!
     public static String printTable(HashSet<Subject> subjects) {
         String result = "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Curso</td></tr>";
+        result += "<tr><th>ID</th><th>Nombre</th><th>Curso</th></tr>";
         for(Subject subject: subjects){
         result += "<tr>" 
                 +  "<td>" + subject.getId() +"</td>"

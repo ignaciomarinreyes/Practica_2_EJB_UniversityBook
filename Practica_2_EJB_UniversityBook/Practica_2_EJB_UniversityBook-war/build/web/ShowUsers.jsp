@@ -9,9 +9,9 @@
 
 <%!
     public static String printTable(List<User> usersTeacher, List<User> usersStudent, List<User> usersAdmin) {
-        String result = "<h1>Teacher</h1>" 
+        String result = "<h3>Teacher</h3>" 
         + "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
+        result += "<tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>Apodo</th><th>Contraseña</th></tr>";
         for(User user: usersTeacher){
         result += "<tr>" 
                 +  "<td>" + user.getId() +"</td>"
@@ -23,9 +23,9 @@
         }
         result += "</table>";
 
-        result += "<h1>Student</h1>" 
+        result += "<h3>Student</h3>" 
         + "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
+        result += "<tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>Apodo</th><th>Contraseña</th></tr>";
         for(User user: usersStudent){
         result += "<tr>"
                 +  "<td>" + user.getId() +"</td>"
@@ -37,9 +37,9 @@
         }
         result += "</table>";
 
-        result += "<h1>Admin</h1>" 
+        result += "<h3>Admin</h3>" 
         + "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Apodo</td><td>Contraseña</td></tr>";
+        result += "<tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>Apodo</th><th>Contraseña</th></tr>";
         for(User user: usersAdmin){
         result += "<tr>"
                 +  "<td>" + user.getId() +"</td>"

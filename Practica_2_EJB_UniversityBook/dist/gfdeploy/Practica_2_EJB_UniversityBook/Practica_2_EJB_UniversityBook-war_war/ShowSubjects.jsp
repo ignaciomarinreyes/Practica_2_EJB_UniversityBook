@@ -13,7 +13,7 @@
 <%!
     public static String printTable(Set<User> students) {
         String result = "<table style='width:100%'>"; 
-        result += "<tr><td>ID</td><td>Nombre</td><td>Apellido</td></tr>";
+        result += "<tr><th>ID</th><th>Nombre</th><th>Apellido</th></tr>";
         for(User student: students){
         result += "<tr>" 
                 +  "<td>" + student.getId() +"</td>"
@@ -39,7 +39,7 @@
             <%  
                 ArrayList<Subject> subjects = (ArrayList<Subject>) request.getAttribute("subjects");
                 for(Subject subject : subjects){
-                    out.println("<h1>"+ subject.getUniversity().getName() + ":" + subject.getDegree().getName() + ":" + subject.getName() + "</h1>"); 
+                    out.println("<h3>"+ subject.getUniversity().getName() + ":" + subject.getDegree().getName() + ":" + subject.getName() + "</h3>"); 
                     out.println(printTable(subject.getStudents()));
                 }
             %>

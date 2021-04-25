@@ -12,7 +12,8 @@
 <%!
     public static String printTable(int numberUserHasLogged, int numberUserLoggedNow, HashMap<String, Integer> mapNumberInvokeBean) {
         String result = "<table style='width:100%'>"; 
-        result += "<tr><td>Concepto</td><td>Valor</td></tr>"
+        result += "<h3>Logueos</h3>"
+                + "<tr><th>Concepto</th><th>Valor</th></tr>"
                 + "<tr>" 
                 + "<td>Número logueos en el sistema </td><td>" + numberUserHasLogged +"</td>"
                 + "</tr>"
@@ -20,9 +21,9 @@
                 + "<td>Número usuarios logueados actualmente</td><td>" + numberUserLoggedNow +"</td>"
                 + "</tr>"
                 + "</table>"
-                + "<h1>Número de veces que se llama a cada componente</h1>"
+                + "<h3>Número de veces que se llama a cada componente</h3>"
                 + "<table style='width:100%'>"
-                + "<tr><td>Componente</td><td>Número llamadas</td></tr>";
+                + "<tr><th>Componente</th><th>Número llamadas</th></tr>";
                 for (Map.Entry<String, Integer> entry : mapNumberInvokeBean.entrySet()) {
                     result += "<tr><td>" + entry.getKey() + "</td><td>" +  entry.getValue() + "</td></tr>";
                 }

@@ -13,11 +13,11 @@
         <div id="centerSpace">
             <%  
                 int[] numberSubjectsByCourse = (int[]) request.getAttribute("numberSubjectsByCourse");
-                out.println("<h1>Número de asignaturas por curso</h1>");
-                out.println("<p>Primer curso: " + numberSubjectsByCourse[0] +"</p>");
-                out.println("<p>Segundo curso: " + numberSubjectsByCourse[1]  +"</p>");
-                out.println("<p>Tercer curso: " +  numberSubjectsByCourse[2] +"</p>");
-                out.println("<p>Cuarto curso: " + numberSubjectsByCourse[3]  +"</p>");
+                out.println("<h3>Número de asignaturas por curso</h3>");
+                out.println("<ul><li>Primer curso: " + numberSubjectsByCourse[0] +"</li>");
+                out.println("<li>Segundo curso: " + numberSubjectsByCourse[1]  +"</li>");
+                out.println("<li>Tercer curso: " +  numberSubjectsByCourse[2] +"</li>");
+                out.println("<li>Cuarto curso: " + numberSubjectsByCourse[3]  +"</li></ul>");
             %>
         </div>
         <%@ include file="Footer.jsp"%> 

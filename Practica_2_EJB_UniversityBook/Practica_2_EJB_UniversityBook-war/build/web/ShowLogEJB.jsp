@@ -13,10 +13,11 @@
 <%!
     public static String printLog(String mensaje) {
         String[] arregloString = mensaje.split("\n");
-        String result = "";
+        String result = "<div style='border: 1px solid black; background-color: white; padding: 10px;'>";
         for(int i=0; i < arregloString.length ;i++){ 
             result += "<p>" + arregloString[i] + "</p>";
-        } 
+        }
+        result += "</div>";
         return result;
     }
 %>
