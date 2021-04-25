@@ -20,7 +20,8 @@
             for (Post post : postUserBean.getMyPosts()) {
                 result += "<tr><td>" + post.getId() + "</td><td>" + post.getTitle() + "</td><td>" + post.getSubject().getName() + "</td></tr>";
             }
-            result += "</table>";
+            result += "<tr><td colspan='3'>Total de donaciones de " + postUserBean.getUser().getName() + ": </td><td>" + postUserBean.getDonationTotal() + "</td></tr>"
+                    + "</table>";
         }
         return result;
     }

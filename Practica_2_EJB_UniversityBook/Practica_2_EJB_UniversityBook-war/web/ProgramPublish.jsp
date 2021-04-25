@@ -19,6 +19,12 @@
                 <span>Programar publicación (milisegundos): </span>
                 <input type="text" name="miliseconds"><br>
                 <input type='hidden' name='command' value='ProgramPublish'>
+                <select width="200px" name="donation">
+                    <option value='No donar'>No donar</option>
+                    <option value='Donar ahora'>Donar ahora</option>
+                    <option value='Donar mensualmente durante 12 meses'>Donar mensualmente durante 12 meses</option>
+                    <option value='Donar trimestralmente durante 12 meses'>Donar trimestralmente durante 12 meses</option>
+                </select>
                 <button type="submit">Confirmar</button>
             </form>
         </div>

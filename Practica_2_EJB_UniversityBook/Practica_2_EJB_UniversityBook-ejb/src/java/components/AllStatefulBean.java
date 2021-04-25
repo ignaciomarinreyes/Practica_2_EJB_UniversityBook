@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.Timeout;
@@ -210,6 +211,15 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
             postUserBeanDelete.remove();
         }
         return atributteDelete;
+    }
+    
+    @Schedule(second="*/45", minute="*", hour="*")
+    public void updateDonationTotalPostUserBean(){
+        System.out.println("updateDonation");
+        for(PostUserBean postUserBean: postUserBeans){
+            postUserBean.calculateRecognitions();
+            postUserBean.recognizedDonation(LocalDateTime.now());
+        }
     }
     
 }
