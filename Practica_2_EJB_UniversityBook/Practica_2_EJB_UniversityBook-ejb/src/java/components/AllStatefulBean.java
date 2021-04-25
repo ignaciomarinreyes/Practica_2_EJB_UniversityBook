@@ -213,11 +213,10 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
         return atributteDelete;
     }
     
-    @Schedule(second="*/45", minute="*", hour="*")
+    @Schedule(second="*/5", minute="*", hour="*")
     public void updateDonationTotalPostUserBean(){
         System.out.println("updateDonation");
         for(PostUserBean postUserBean: postUserBeans){
-            postUserBean.calculateRecognitions();
             postUserBean.recognizedDonation(LocalDateTime.now());
         }
     }

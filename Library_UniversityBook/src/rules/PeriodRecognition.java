@@ -24,7 +24,8 @@ public class PeriodRecognition extends RecognitionStrategy{
   
     @Override
     public void calculateDonationRecognitions(PostUserBeanRemote postUserBean) {
-        for(int i = 1; i <= 12; i = i + periodRecognition - 1){
+        for(int i = 0; i < 12; i = i + periodRecognition){
+            System.out.println(i);
             //postUserBean.addDonationRecognition(new DonationRecognition(1, LocalDateTime.now().plusMonths(i)));
             postUserBean.addDonationRecognition(new DonationRecognition(1, LocalDateTime.now().plusSeconds(i)));
         }

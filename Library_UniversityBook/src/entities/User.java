@@ -35,6 +35,7 @@ public class User {
     }
 
     public User(String nickname, String password, String name, String surname, Rol rol, Address address) {
+        this.id = idUser++;
         this.nickname = nickname;
         this.password = password;
         this.name = name;
