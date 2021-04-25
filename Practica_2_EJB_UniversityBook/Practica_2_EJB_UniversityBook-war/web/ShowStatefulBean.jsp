@@ -29,7 +29,7 @@
     public static String printTableFavouriteSubjectsBean(AllStatefulBeanLocal allStatefulBeanLocal) {
         String result = "";
         for (FavouriteSubjectsBean favouriteSubjectsBean : allStatefulBeanLocal.getAllFavouriteSubjectsBean()) {
-            result += "<span style='text-decoration: underline;'>PostUserBean_" + favouriteSubjectsBean.hashCode() + " " + favouriteSubjectsBean.getUser().getName() + "</span><form action='FrontController' method='GET' style='display: inline;'><button type='submit'>Eliminar</button><input type='hidden' name='hashCode' value='" + favouriteSubjectsBean.hashCode() +"'><input type='hidden' name='command' value='RemoveStateful'></form>"
+            result += "<span style='text-decoration: underline;'>FavouriteSubjectsBean_" + favouriteSubjectsBean.hashCode() + " " + favouriteSubjectsBean.getUser().getName() + "</span><form action='FrontController' method='GET' style='display: inline;'><button type='submit'>Eliminar</button><input type='hidden' name='hashCode' value='" + favouriteSubjectsBean.hashCode() +"'><input type='hidden' name='command' value='RemoveStateful'></form>"
                     + "<table style='width:100%'><tr><th>Id</th><th>Nombre</th></tr>";
             for (Subject subject : favouriteSubjectsBean.getFavouritesSubjects()) {
                 result += "<tr><td>" + subject.getId() + "</td><td>" + subject.getName() + "</td></tr>";
