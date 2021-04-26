@@ -6,11 +6,12 @@
             <name>Practica_2_EJB_UniversityBook-war</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
-                <library dirs="100">
-                    <file>${reference.Practica_2_EJB_UniversityBook-ejb.dist}</file>
-                </library>
                 <library dirs="200">
                     <file>${reference.Library_UniversityBook.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="100">
+                    <file>${reference.Practica_2_EJB_UniversityBook-ejb.dist}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

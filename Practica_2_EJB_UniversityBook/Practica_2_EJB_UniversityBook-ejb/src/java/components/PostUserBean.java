@@ -126,7 +126,7 @@ public class PostUserBean implements PostUserBeanRemote {
     @Override
     public int recognizedDonation(LocalDateTime date) {
         statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
-        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::recognizedDonation::Comprueba las donaciones cobradas");
+        System.out.println("PostUserBean_" + this.hashCode() + "::recognizedDonation::Comprueba las donaciones cobradas");
         int result = 0;
         Iterator it = donationRecognitions.iterator();
         while (it.hasNext()) {

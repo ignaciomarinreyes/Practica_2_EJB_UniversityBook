@@ -218,7 +218,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
     @Schedule(second = "*/5", minute = "*", hour = "*")
     public void updateDonationTotalPostUserBean() {
         statisticBean.addMapNumberInvokeBean("AllStatefulBean");
-        logBean.writeLogEJBInfo("AllStatefulBean::updateDonationTotalPostUserBean::Se actualizan las donaciones cobradas de los postUserBeans");
+        System.out.println("AllStatefulBean::updateDonationTotalPostUserBean::Se actualizan las donaciones cobradas de los postUserBeans");
         for (PostUserBean postUserBean : postUserBeans) {
             postUserBean.recognizedDonation(LocalDateTime.now());
         }
