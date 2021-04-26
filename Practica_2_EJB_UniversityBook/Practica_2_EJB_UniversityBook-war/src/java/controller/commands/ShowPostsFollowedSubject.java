@@ -1,6 +1,5 @@
 package controller.commands;
 
-
 import entities.User;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -9,7 +8,7 @@ import components.AllStatefulBeanLocal;
 public class ShowPostsFollowedSubject extends FrontCommand {
 
     private AllStatefulBeanLocal allStatefulBeanLocal;
-    
+
     @Override
     public void process() {
         try {

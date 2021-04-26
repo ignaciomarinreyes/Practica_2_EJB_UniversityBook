@@ -11,22 +11,22 @@
 
 <%!
     public static String printTable(int numberUserHasLogged, int numberUserLoggedNow, HashMap<String, Integer> mapNumberInvokeBean) {
-        String result = "<table style='width:100%'>"; 
+        String result = "<table style='width:100%'>";
         result += "<h3>Logueos</h3>"
                 + "<tr><th>Concepto</th><th>Valor</th></tr>"
-                + "<tr>" 
-                + "<td>Número logueos en el sistema </td><td>" + numberUserHasLogged +"</td>"
+                + "<tr>"
+                + "<td>Número logueos en el sistema </td><td>" + numberUserHasLogged + "</td>"
                 + "</tr>"
-                + "<tr>" 
-                + "<td>Número usuarios logueados actualmente</td><td>" + numberUserLoggedNow +"</td>"
+                + "<tr>"
+                + "<td>Número usuarios logueados actualmente</td><td>" + numberUserLoggedNow + "</td>"
                 + "</tr>"
                 + "</table>"
                 + "<h3>Número de veces que se llama a cada componente</h3>"
                 + "<table style='width:100%'>"
                 + "<tr><th>Componente</th><th>Número llamadas</th></tr>";
-                for (Map.Entry<String, Integer> entry : mapNumberInvokeBean.entrySet()) {
-                    result += "<tr><td>" + entry.getKey() + "</td><td>" +  entry.getValue() + "</td></tr>";
-                }
+        for (Map.Entry<String, Integer> entry : mapNumberInvokeBean.entrySet()) {
+            result += "<tr><td>" + entry.getKey() + "</td><td>" + entry.getValue() + "</td></tr>";
+        }
         return result;
     }
 
@@ -41,8 +41,7 @@
         <%@ include file="Header.jsp"%>    
         <%@ include file="MenuAdmin.jsp"%>    
         <div id="centerSpace">
-            <%                 
-                out.println(printTable(((Integer) request.getAttribute("numberUserHasLogged")), ((Integer) request.getAttribute("numberUserLoggedNow")), (HashMap<String, Integer>) request.getAttribute("mapNumberInvokeBean")) );
+            <%                out.println(printTable(((Integer) request.getAttribute("numberUserHasLogged")), ((Integer) request.getAttribute("numberUserLoggedNow")), (HashMap<String, Integer>) request.getAttribute("mapNumberInvokeBean")));
             %>
         </div>
         <%@ include file="Footer.jsp"%> 

@@ -9,9 +9,7 @@ import javax.naming.NamingException;
 import components.AllStatefulBeanLocal;
 import components.FavouriteSubjectsBean;
 import components.FavouriteSubjectsBeanRemote;
-import components.LogBeanRemote;
 import components.StatisticBeanRemote;
-import javax.ejb.EJB;
 
 public class Login extends FrontCommand {
 

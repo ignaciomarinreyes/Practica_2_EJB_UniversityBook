@@ -1,9 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class University {
+public class University implements Serializable {
 
     private static int idUniversity = 0;
     private int id;

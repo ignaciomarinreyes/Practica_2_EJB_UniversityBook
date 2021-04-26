@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package components;
 
 import entities.User;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.naming.InitialContext;
@@ -21,13 +17,13 @@ public class SessionBean implements SessionBeanRemote {
     private UserBeanRemote userBean;
     private StatisticBeanRemote statisticBean;
     private LogBeanRemote logBean;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         try {
             userBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/UserBean!components.UserBeanRemote");
             statisticBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StatisticBean!components.StatisticBeanRemote");
-            logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");            
+            logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");
             usersLogged = new ArrayList<User>();
         } catch (NamingException ex) {
             ex.printStackTrace();
@@ -35,16 +31,22 @@ public class SessionBean implements SessionBeanRemote {
         statisticBean.addMapNumberInvokeBean("SessionBean");
         logBean.writeLogEJBInfo("SessionBean::init::Llamada al PostConstruct");
     }
-    
+
+    @PreDestroy
+    public void destroy() {
+        statisticBean.addMapNumberInvokeBean("SessionBean");
+        logBean.writeLogEJBInfo("SessionBean::destroy::Llamada al PreDestroy");
+    }
+
     @Override
-    public User login(String nickName, String password) {   
+    public User login(String nickName, String password) {
         statisticBean.addMapNumberInvokeBean("SessionBean");
         logBean.writeLogEJBInfo("SessionBean::login::Inicia sesión un usuario");
         User user = userBean.getUser(nickName, password);
-        if (user != null){
+        if (user != null) {
             usersLogged.add(user);
             return user;
-        } else{
+        } else {
             return null;
         }
     }
@@ -60,11 +62,11 @@ public class SessionBean implements SessionBeanRemote {
     public void remove(User user) {
         statisticBean.addMapNumberInvokeBean("SessionBean");
         logBean.writeLogEJBInfo("SessionBean::remove::Borra un usuario del SessionBean");
-        for(int i = 0; i < usersLogged.size(); i++){
-            if(usersLogged.get(i).getId() == user.getId()){
+        for (int i = 0; i < usersLogged.size(); i++) {
+            if (usersLogged.get(i).getId() == user.getId()) {
                 usersLogged.remove(i);
             }
         }
     }
-  
+
 }

@@ -12,12 +12,12 @@
         <div id="centerSpace">
             <form action='FrontController' method='GET'>
                 <p>Título: </p>
-                <input type="text" name="title"><br>
+                <input type="text" name="title" required><br>
                 <p>Mensaje:</p>
-                <textarea name="content" rows="4" cols="50"></textarea><br>
+                <textarea name="content" rows="4" cols="50" required></textarea><br>
                 <input type='hidden' id='subjects' name='subject' value='<%= request.getParameter("subject")%>'>   
                 <span>Programar publicación (milisegundos): </span>
-                <input type="text" name="miliseconds"><br>
+                <input type="number" name="miliseconds" required><br>
                 <input type='hidden' name='command' value='ProgramPublish'>
                 <select width="200px" name="donation">
                     <option value='No donar'>No donar</option>

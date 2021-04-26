@@ -1,25 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package components;
 
-import data.Data;
-import entities.Degree;
 import entities.Subject;
-import entities.University;
-import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-/**
- *
- * @author ignacio
- */
 @Stateless
 public class SubjectsOperation implements SubjectsOperationRemote {
 
@@ -27,19 +15,25 @@ public class SubjectsOperation implements SubjectsOperationRemote {
     private StudyBeanRemote studyBean;
     private StatisticBeanRemote statisticBean;
     private LogBeanRemote logBean;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         try {
             statisticBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StatisticBean!components.StatisticBeanRemote");
-            logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");            
+            logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");
         } catch (NamingException ex) {
             ex.printStackTrace();
         }
         statisticBean.addMapNumberInvokeBean("SubjectsOperation");
         logBean.writeLogEJBInfo("SubjectsOperation::init::Llamada al PostConstruct");
     }
- 
+
+    @PreDestroy
+    public void destroy() {
+        statisticBean.addMapNumberInvokeBean("SubjectsOperation");
+        logBean.writeLogEJBInfo("SubjectsOperation::destroy::Llamada al PreDestroy");
+    }
+
     @Override
     public int[] getNumberSubjectsByCourse() {
         statisticBean.addMapNumberInvokeBean("SubjectsOperation");

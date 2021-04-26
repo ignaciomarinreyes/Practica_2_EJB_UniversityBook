@@ -1,10 +1,11 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Degree {
+public class Degree implements Serializable {
 
     private static int idDegree = 0;
     private int id;

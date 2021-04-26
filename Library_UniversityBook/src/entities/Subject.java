@@ -1,8 +1,9 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Subject {
+public class Subject implements Serializable {
 
     private static int idSubject = 0;
     private int id;

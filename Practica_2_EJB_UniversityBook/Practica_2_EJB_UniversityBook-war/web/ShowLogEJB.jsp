@@ -13,11 +13,11 @@
 <%!
     public static String printLog(String mensaje) {
         String[] arregloString = mensaje.split("\n");
-        String result = "<div style='border: 1px solid black; background-color: white; padding: 10px;'>";
-        for(int i=0; i < arregloString.length ;i++){ 
-            result += "<p>" + arregloString[i] + "</p>";
+        String result = "<div style='border: 1px solid black; background-color: white; padding: 20px;'><ul>";
+        for (int i = 0; i < arregloString.length; i++) {
+            result += "<li>" + arregloString[i] + "</li>";
         }
-        result += "</div>";
+        result += "</ul></div>";
         return result;
     }
 %>
@@ -31,8 +31,7 @@
         <%@ include file="Header.jsp"%>    
         <%@ include file="MenuAdmin.jsp"%>    
         <div id="centerSpace">
-            <%  
-                out.println(printLog((String) request.getAttribute("logEJB")));
+            <%                out.println(printLog((String) request.getAttribute("logEJB")));
             %>
         </div>
         <%@ include file="Footer.jsp"%> 

@@ -11,13 +11,12 @@
         <%@ include file="Header.jsp"%>    
         <%@ include file="MenuAdmin.jsp"%>    
         <div id="centerSpace">
-            <%  
-                int[] numberSubjectsByCourse = (int[]) request.getAttribute("numberSubjectsByCourse");
+            <%                int[] numberSubjectsByCourse = (int[]) request.getAttribute("numberSubjectsByCourse");
                 out.println("<h3>Número de asignaturas por curso</h3>");
-                out.println("<ul><li>Primer curso: " + numberSubjectsByCourse[0] +"</li>");
-                out.println("<li>Segundo curso: " + numberSubjectsByCourse[1]  +"</li>");
-                out.println("<li>Tercer curso: " +  numberSubjectsByCourse[2] +"</li>");
-                out.println("<li>Cuarto curso: " + numberSubjectsByCourse[3]  +"</li></ul>");
+                out.println("<ul><li>Primer curso: " + numberSubjectsByCourse[0] + "</li>");
+                out.println("<li>Segundo curso: " + numberSubjectsByCourse[1] + "</li>");
+                out.println("<li>Tercer curso: " + numberSubjectsByCourse[2] + "</li>");
+                out.println("<li>Cuarto curso: " + numberSubjectsByCourse[3] + "</li></ul>");
             %>
         </div>
         <%@ include file="Footer.jsp"%> 

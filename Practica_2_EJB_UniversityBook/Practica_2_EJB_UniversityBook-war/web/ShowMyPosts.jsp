@@ -11,7 +11,7 @@
     public static String printPosts(List<Post> posts) {
         String result = "";
         for (Post post : posts) {
-            result += "<div class='post'><p class='subjectPost' style='border-bottom: none; padding-bottom: 0px;'>" + post.getSubject().getName() +"</p><h1>" + post.getTitle() + "</h1>"
+            result += "<div class='post'><p class='subjectPost' style='border-bottom: none; padding-bottom: 0px;'>" + post.getSubject().getName() + "</p><h1>" + post.getTitle() + "</h1>"
                     + "<div class='tuser'><span>" + post.getUser().getName() + "</span><span> " + post.getDate() + "</span></div>"
                     + "<p>" + post.getContent() + "</p>";
             if (post.getPathImage() != null) {
@@ -42,7 +42,7 @@
             result += "</div>";
             result += "<form action='FrontController' style='display: inline;' method='GET''>";
             result += "<input type='hidden' name='command' value='GiveLike'> ";
-            result +="<input type='hidden' name='idPost' value='"+  post.getId() +"'> ";
+            result += "<input type='hidden' name='idPost' value='" + post.getId() + "'> ";
             result += "<input value=' + Añadir like' type='submit'>";
             result += "</form> ";
             result += "<span class='like'>Me gusta: " + post.numberLikes() + "</span>";

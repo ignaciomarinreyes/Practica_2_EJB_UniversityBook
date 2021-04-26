@@ -12,15 +12,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.PostActivate;
+import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-/**
- *
- * @author ignacio
- */
 @Stateful
 public class FavouriteSubjectsBean implements FavouriteSubjectsBeanRemote {
 
@@ -29,11 +28,11 @@ public class FavouriteSubjectsBean implements FavouriteSubjectsBeanRemote {
     private User user;
     private StatisticBeanRemote statisticBean;
     private LogBeanRemote logBean;
-    
+
     @PostConstruct
     public void init() {
         subjects = new HashSet<Subject>();
-        try {      
+        try {
             allStatefulBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/AllStatefulBean!components.AllStatefulBeanLocal");
             statisticBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StatisticBean!components.StatisticBeanRemote");
             logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");
@@ -43,6 +42,24 @@ public class FavouriteSubjectsBean implements FavouriteSubjectsBeanRemote {
         statisticBean.addMapNumberInvokeBean("FavouriteSubjectsBean_" + this.hashCode());
         logBean.writeLogEJBInfo("FavouriteSubjectsBean_" + this.hashCode() + "::init::Llamada al PostConstruct");
         allStatefulBean.addFavouriteSubjectBean(this);
+    }
+
+    @PreDestroy
+    public void destroy() {
+        statisticBean.addMapNumberInvokeBean("FavouriteSubjectsBean");
+        logBean.writeLogEJBInfo("FavouriteSubjectsBean::destroy::Llamada al PreDestroy");
+    }
+
+    @PostActivate
+    public void postActivate() {
+        statisticBean.addMapNumberInvokeBean("FavouriteSubjectsBean");
+        logBean.writeLogEJBInfo("FavouriteSubjectsBean::postActivate::El bean es cargado de disco");
+    }
+
+    @PrePassivate
+    public void prePassivate() {
+        statisticBean.addMapNumberInvokeBean("FavouriteSubjectsBean");
+        logBean.writeLogEJBInfo("FavouriteSubjectsBean::prePassivate::El bean es almacenado en disco");
     }
 
     @Override
@@ -77,9 +94,7 @@ public class FavouriteSubjectsBean implements FavouriteSubjectsBeanRemote {
     @Override
     public void remove() {
         statisticBean.addMapNumberInvokeBean("FavouriteSubjectsBean_" + this.hashCode());
-        logBean.writeLogEJBInfo("FavouriteSubjectsBean_" + this.hashCode() +  "::remove::Se borra el favouriteSubjectsBean");
-    }   
-    
+        logBean.writeLogEJBInfo("FavouriteSubjectsBean_" + this.hashCode() + "::remove::Se borra el favouriteSubjectsBean");
+    }
 
-    
 }

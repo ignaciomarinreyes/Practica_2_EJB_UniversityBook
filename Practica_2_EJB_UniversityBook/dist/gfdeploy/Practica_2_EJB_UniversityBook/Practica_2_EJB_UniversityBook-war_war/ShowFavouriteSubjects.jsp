@@ -13,14 +13,14 @@
 
 <%!
     public static String printTable(HashSet<Subject> subjects) {
-        String result = "<table style='width:100%'>"; 
+        String result = "<table style='width:100%'>";
         result += "<tr><th>ID</th><th>Nombre</th><th>Curso</th></tr>";
-        for(Subject subject: subjects){
-        result += "<tr>" 
-                +  "<td>" + subject.getId() +"</td>"
-                +  "<td>" + subject.getName() +"</td>"
-                +  "<td>" + subject.getCourse() +"</td>"
-                + "</tr>";
+        for (Subject subject : subjects) {
+            result += "<tr>"
+                    + "<td>" + subject.getId() + "</td>"
+                    + "<td>" + subject.getName() + "</td>"
+                    + "<td>" + subject.getCourse() + "</td>"
+                    + "</tr>";
         }
         result += "</table>";
         return result;
@@ -37,8 +37,7 @@
         <%@ include file="Header.jsp"%>    
         <%@ include file="Menu.jsp"%>    
         <div id="centerSpace">
-            <%  
-                HashSet<Subject> subjectsList = (HashSet<Subject>) request.getAttribute("favouriteSubjects");
+            <%                HashSet<Subject> subjectsList = (HashSet<Subject>) request.getAttribute("favouriteSubjects");
                 out.println(printTable(subjectsList));
             %>
         </div>

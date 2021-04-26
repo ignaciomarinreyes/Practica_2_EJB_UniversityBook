@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package components;
 
 import data.Data;
@@ -10,17 +5,17 @@ import entities.DonationRecognition;
 import entities.Post;
 import entities.Subject;
 import entities.User;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
+import javax.ejb.PostActivate;
+import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.ejb.TimerService;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -52,6 +47,24 @@ public class PostUserBean implements PostUserBeanRemote {
         donationRecognitions = new ArrayList<DonationRecognition>();
         statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
         logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::init::Llamada al PostConstruct");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::destroy::Llamada al PreDestroy");
+    }
+
+    @PostActivate
+    public void postActivate() {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::postActivate::El bean es cargado de disco");
+    }
+
+    @PrePassivate
+    public void prePassivate() {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::prePassivate::El bean es almacenado en disco");
     }
 
     @Override
@@ -112,6 +125,8 @@ public class PostUserBean implements PostUserBeanRemote {
 
     @Override
     public int recognizedDonation(LocalDateTime date) {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::recognizedDonation::Comprueba las donaciones cobradas");
         int result = 0;
         Iterator it = donationRecognitions.iterator();
         while (it.hasNext()) {
@@ -126,6 +141,8 @@ public class PostUserBean implements PostUserBeanRemote {
 
     @Override
     public void calculateRecognitions() {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::calculateRecognitions::Calcula los reconocimientos de las donaciones");
         dontationTemp = donationTotal;
         donationRecognitions.clear();
         for (Post post : myPosts) {
@@ -135,6 +152,8 @@ public class PostUserBean implements PostUserBeanRemote {
 
     @Override
     public void addDonationRecognition(DonationRecognition donationRecognition) {
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::addDonationRecognition::Añade un reconocimiento de donación");
         donationRecognitions.add(donationRecognition);
     }
 
@@ -145,7 +164,7 @@ public class PostUserBean implements PostUserBeanRemote {
             case "Donar mensualmente durante 12 meses":
                 return Post.newMontlhlyDonationForAYear(title, user, date, content, pathImage, subject);
             case "Donar ahora":
-                return Post.newNowDonation(title, user, date, content, pathImage, subject);             
+                return Post.newNowDonation(title, user, date, content, pathImage, subject);
             case "Donar trimestralmente durante 12 meses":
                 return Post.newQuarterlyDonationForAYear(title, user, date, content, pathImage, subject);
             default:
@@ -155,9 +174,11 @@ public class PostUserBean implements PostUserBeanRemote {
 
     @Override
     public int getDonationTotal() {
-        if(donationTotal <= dontationTemp){
+        statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
+        logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::getDonationTotal::Obtiene el total de donaciones cobradas");
+        if (donationTotal <= dontationTemp) {
             return dontationTemp;
-        }else {
+        } else {
             return donationTotal;
         }
     }

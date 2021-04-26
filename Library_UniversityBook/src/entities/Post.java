@@ -1,7 +1,7 @@
 package entities;
 
 import components.PostUserBeanRemote;
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import rules.NowRecognition;
 import rules.PeriodRecognition;
 import rules.RecognitionStrategy;
 
-public class Post {
+public class Post implements Serializable {
 
     private static int idPost = 0;
     private int id;
@@ -130,23 +130,23 @@ public class Post {
     }
 
     public void calculateRecognitions(PostUserBeanRemote postUserBean) {
-        recognitionPost = recognitionStrategy.calculateDonationRecognitions(postUserBean, this);       
+        recognitionPost = recognitionStrategy.calculateDonationRecognitions(postUserBean, this);
     }
-    
-    public static Post newFreeDonationPost(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
-        return new Post(title, user, date, content, pathImage, subject, new FreeRecognition()); 
+
+    public static Post newFreeDonationPost(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject) {
+        return new Post(title, user, date, content, pathImage, subject, new FreeRecognition());
     }
-    
-    public static Post newMontlhlyDonationForAYear(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
-        return new Post(title, user, date, content, pathImage, subject, new PeriodRecognition(1)); 
+
+    public static Post newMontlhlyDonationForAYear(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject) {
+        return new Post(title, user, date, content, pathImage, subject, new PeriodRecognition(1));
     }
-    
-    public static Post newQuarterlyDonationForAYear(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
-        return new Post(title, user, date, content, pathImage, subject,  new PeriodRecognition(3)); 
+
+    public static Post newQuarterlyDonationForAYear(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject) {
+        return new Post(title, user, date, content, pathImage, subject, new PeriodRecognition(3));
     }
-    
-    public static Post newNowDonation(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
-        return new Post(title, user, date, content, pathImage, subject, new NowRecognition()); 
+
+    public static Post newNowDonation(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject) {
+        return new Post(title, user, date, content, pathImage, subject, new NowRecognition());
     }
 
     public int getRecognitionPost() {

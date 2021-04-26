@@ -1,8 +1,9 @@
 package entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Comment {
+public class Comment implements Serializable {
 
     private int idComment = 0;
     private int id;

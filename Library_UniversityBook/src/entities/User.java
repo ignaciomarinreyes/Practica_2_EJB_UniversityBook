@@ -1,11 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class User {
+public class User implements Serializable {
 
     private static int idUser = 0;
     private int id;
@@ -156,5 +155,4 @@ public class User {
         return true;
     }
 
-    
 }

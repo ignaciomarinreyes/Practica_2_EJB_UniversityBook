@@ -1,16 +1,13 @@
 package controller.commands;
 
 import components.AllStatefulBeanLocal;
-import components.FavouriteSubjectsBeanRemote;
-import components.StudyBeanRemote;
-import entities.User;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class RemoveStateful extends FrontCommand {
 
     private AllStatefulBeanLocal allStatefulBean;
-    
+
     @Override
     public void process() {
         try {

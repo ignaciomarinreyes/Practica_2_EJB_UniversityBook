@@ -8,7 +8,7 @@ import components.AllStatefulBeanLocal;
 public class GiveLike extends FrontCommand {
 
     private AllStatefulBeanLocal allStatefulBean;
-    
+
     @Override
     public void process() {
         try {

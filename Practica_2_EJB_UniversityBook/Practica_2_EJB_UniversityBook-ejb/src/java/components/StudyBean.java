@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package components;
 
 import data.Data;
@@ -10,9 +5,8 @@ import entities.Degree;
 import entities.Subject;
 import entities.University;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.naming.InitialContext;
@@ -27,9 +21,9 @@ public class StudyBean implements StudyBeanRemote {
     private ArrayList<Subject> subjects;
     private StatisticBeanRemote statisticBean;
     private LogBeanRemote logBean;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         universities = new ArrayList<University>();
         degrees = new ArrayList<Degree>();
         subjects = new ArrayList<Subject>();
@@ -38,12 +32,18 @@ public class StudyBean implements StudyBeanRemote {
         subjects.addAll(Data.getSubjects());
         try {
             statisticBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/StatisticBean!components.StatisticBeanRemote");
-            logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");            
+            logBean = InitialContext.doLookup("java:global/Practica_2_EJB_UniversityBook/Practica_2_EJB_UniversityBook-ejb/LogBean!components.LogBeanRemote");
         } catch (NamingException ex) {
             ex.printStackTrace();
         }
         statisticBean.addMapNumberInvokeBean("StudyBean");
         logBean.writeLogEJBInfo("StudyBean::init::Llamada al PostConstruct");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        statisticBean.addMapNumberInvokeBean("StudyBean");
+        logBean.writeLogEJBInfo("StudyBean::destroy::Llamada al PreDestroy");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class StudyBean implements StudyBeanRemote {
     @Override
     public ArrayList<Degree> getDegrees() {
         statisticBean.addMapNumberInvokeBean("StudyBean");
-        logBean.writeLogEJBInfo("StudyBean::getDegrees::Obtiene los grados");        
+        logBean.writeLogEJBInfo("StudyBean::getDegrees::Obtiene los grados");
         return degrees;
     }
 
@@ -65,19 +65,18 @@ public class StudyBean implements StudyBeanRemote {
         statisticBean.addMapNumberInvokeBean("StudyBean");
         logBean.writeLogEJBInfo("StudyBean::getSubjects::Obtiene las asignaturas");
         return subjects;
-    }  
+    }
 
     @Override
     public Subject getSubjectById(int idSubject) {
         statisticBean.addMapNumberInvokeBean("StudyBean");
         logBean.writeLogEJBInfo("StudyBean::getSubjectById::Obtiene las asignaturas por ID");
-        for(Subject subject :subjects){
-            if(subject.getId() == idSubject){
+        for (Subject subject : subjects) {
+            if (subject.getId() == idSubject) {
                 return subject;
             }
         }
         return null;
     }
-  
-    
+
 }

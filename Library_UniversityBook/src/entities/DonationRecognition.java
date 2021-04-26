@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- *
- * @author ignacio
- */
-public class DonationRecognition {
-    
+public class DonationRecognition implements Serializable {
+
     private int donation;
     private LocalDateTime donationDate;
 
@@ -25,9 +16,9 @@ public class DonationRecognition {
     public int getDonation() {
         return donation;
     }
-    
-    public boolean isRecognizableBy(LocalDateTime date){
+
+    public boolean isRecognizableBy(LocalDateTime date) {
         return date.isAfter(donationDate) || date.isEqual(donationDate);
     }
-    
+
 }

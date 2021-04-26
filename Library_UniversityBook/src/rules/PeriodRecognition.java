@@ -8,32 +8,25 @@ package rules;
 import components.PostUserBeanRemote;
 import entities.DonationRecognition;
 import entities.Post;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.io.Serializable;
 
-/**
- *
- * @author ignacio
- */
-public class PeriodRecognition extends RecognitionStrategy{
+public class PeriodRecognition extends RecognitionStrategy implements Serializable {
 
     private int periodRecognition;
 
     public PeriodRecognition(int periodRecognition) {
         this.periodRecognition = periodRecognition;
     }
-  
+
     @Override
     public int calculateDonationRecognitions(PostUserBeanRemote postUserBean, Post post) {
         int result = 0;
-        for(int i = 0; i < 12; i = i + periodRecognition){
+        for (int i = 0; i < 12; i = i + periodRecognition) {
             //postUserBean.addDonationRecognition(new DonationRecognition(1, post.getDate().plusMonths(i)));
             result++;
             postUserBean.addDonationRecognition(new DonationRecognition(1, post.getDate().plusSeconds(i)));
         }
         return result;
     }
-        
-    
-    
+
 }

@@ -5,8 +5,8 @@
         <title>UniversityBook</title> 
     </head>
     <body>
-        <% 
-            if(request.getSession().getAttribute("user") != null){
+        <%
+            if (request.getSession().getAttribute("user") != null) {
                 response.sendRedirect("/Practica_2_EJB_UniversityBook-war/FrontController?command=Login");
             }
         %>

@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package components;
 
 import data.Data;
 import entities.Post;
 import entities.Subject;
 import entities.User;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
@@ -54,6 +47,12 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
         Data.loadDefaultData();
     }
 
+    @PreDestroy
+    public void destroy() {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
+        logBean.writeLogEJBInfo("AllStatefulBean::destroy::Llamada al PreDestroy");
+    }
+
     @Override
     public void setTimer(int miliseconds, User user, Post post) {
         programmedPost = post;
@@ -70,6 +69,8 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
 
     @Timeout
     public void timeout(Timer t) {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
+        logBean.writeLogEJBInfo("AllStatefulBean::timeout::Se acaba la cuenta atrás del post programado");
         postUserBeanChoosen.addPost(programmedPost);
         postUserBeanChoosen.calculateRecognitions();
     }
@@ -213,12 +214,14 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
         }
         return atributteDelete;
     }
-    
-    @Schedule(second="*/5", minute="*", hour="*")
-    public void updateDonationTotalPostUserBean(){
-        for(PostUserBean postUserBean: postUserBeans){
+
+    @Schedule(second = "*/5", minute = "*", hour = "*")
+    public void updateDonationTotalPostUserBean() {
+        statisticBean.addMapNumberInvokeBean("AllStatefulBean");
+        logBean.writeLogEJBInfo("AllStatefulBean::updateDonationTotalPostUserBean::Se actualizan las donaciones cobradas de los postUserBeans");
+        for (PostUserBean postUserBean : postUserBeans) {
             postUserBean.recognizedDonation(LocalDateTime.now());
         }
     }
-    
+
 }

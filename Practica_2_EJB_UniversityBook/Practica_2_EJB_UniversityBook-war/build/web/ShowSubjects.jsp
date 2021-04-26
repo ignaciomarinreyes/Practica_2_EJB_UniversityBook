@@ -12,14 +12,14 @@
 
 <%!
     public static String printTable(Set<User> students) {
-        String result = "<table style='width:100%'>"; 
+        String result = "<table style='width:100%'>";
         result += "<tr><th>ID</th><th>Nombre</th><th>Apellido</th></tr>";
-        for(User student: students){
-        result += "<tr>" 
-                +  "<td>" + student.getId() +"</td>"
-                +  "<td>" + student.getName() +"</td>"
-                +  "<td>" + student.getSurname() +"</td>"
-                + "</tr>";
+        for (User student : students) {
+            result += "<tr>"
+                    + "<td>" + student.getId() + "</td>"
+                    + "<td>" + student.getName() + "</td>"
+                    + "<td>" + student.getSurname() + "</td>"
+                    + "</tr>";
         }
         result += "</table>";
         return result;
@@ -36,10 +36,9 @@
         <%@ include file="Header.jsp"%>    
         <%@ include file="MenuAdmin.jsp"%>    
         <div id="centerSpace">
-            <%  
-                ArrayList<Subject> subjects = (ArrayList<Subject>) request.getAttribute("subjects");
-                for(Subject subject : subjects){
-                    out.println("<h3>"+ subject.getUniversity().getName() + ":" + subject.getDegree().getName() + ":" + subject.getName() + "</h3>"); 
+            <%                ArrayList<Subject> subjects = (ArrayList<Subject>) request.getAttribute("subjects");
+                for (Subject subject : subjects) {
+                    out.println("<h3>" + subject.getUniversity().getName() + ":" + subject.getDegree().getName() + ":" + subject.getName() + "</h3>");
                     out.println(printTable(subject.getStudents()));
                 }
             %>

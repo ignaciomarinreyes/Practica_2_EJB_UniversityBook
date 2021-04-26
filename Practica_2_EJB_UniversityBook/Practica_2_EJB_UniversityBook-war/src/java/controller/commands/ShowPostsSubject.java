@@ -6,10 +6,10 @@ import javax.naming.NamingException;
 import components.AllStatefulBeanLocal;
 
 public class ShowPostsSubject extends FrontCommand {
-    
+
     private AllStatefulBeanLocal allStatefulBeanLocal;
     private StudyBeanRemote studyBean;
-    
+
     @Override
     public void process() {
         try {

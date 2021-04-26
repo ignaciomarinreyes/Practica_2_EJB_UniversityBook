@@ -12,9 +12,9 @@
         <div id="centerSpace">
             <form action='FrontController' method='GET'>
                 <p>Título: </p>
-                <input type="text" name="title"><br>
+                <input type="text" name="title" required><br>
                 <p>Mensaje:</p>
-                <textarea name="content" rows="4" cols="50"></textarea><br>
+                <textarea name="content" rows="4" cols="50" required></textarea><br>
                 <select width="200px" name="donation">
                     <option value='No donar'>No donar</option>
                     <option value='Donar ahora'>Donar ahora</option>
@@ -29,4 +29,4 @@
     </body>
 </html>
 
-            
+
