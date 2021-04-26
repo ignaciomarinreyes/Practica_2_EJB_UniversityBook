@@ -4,6 +4,7 @@ import components.PostUserBeanRemote;
 import entities.Post;
 import entities.User;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ProgramPublish extends FrontCommand {
 
@@ -12,9 +13,8 @@ public class ProgramPublish extends FrontCommand {
     @Override
     public void process() {
         postUserBean = (PostUserBeanRemote) request.getSession().getAttribute("postUserBean" + ((User) request.getSession().getAttribute("user")).getId());
-        postUserBean.programPost(Integer.parseInt(request.getParameter("miliseconds")),(String) request.getParameter("title"), (User) request.getSession().getAttribute("user"), LocalDate.now(), (String) request.getParameter("content"), null, Integer.valueOf(request.getParameter("subject")), (String) request.getParameter("donation"));
-        request.setAttribute("postsMYUser", postUserBean.getMyPosts());
-        postUserBean.calculateRecognitions();
+        postUserBean.programPost(Integer.parseInt(request.getParameter("miliseconds")),(String) request.getParameter("title"), (User) request.getSession().getAttribute("user"), LocalDateTime.now(), (String) request.getParameter("content"), null, Integer.valueOf(request.getParameter("subject")), (String) request.getParameter("donation"));
+        request.setAttribute("postsMYUser", postUserBean.getMyPosts());        
         forward("/ShowMyPosts.jsp");
     }
 

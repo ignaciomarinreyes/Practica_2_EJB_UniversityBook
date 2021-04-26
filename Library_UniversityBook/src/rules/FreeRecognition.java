@@ -7,6 +7,7 @@ package rules;
 
 import components.PostUserBeanRemote;
 import entities.DonationRecognition;
+import entities.Post;
 import java.time.LocalDate;
 
 /**
@@ -16,6 +17,8 @@ import java.time.LocalDate;
 public class FreeRecognition extends RecognitionStrategy{
 
     @Override
-    public void calculateDonationRecognitions(PostUserBeanRemote postUserBean) {}
+    public int calculateDonationRecognitions(PostUserBeanRemote postUserBean, Post post) {
+        return 0;
+    }
     
 }

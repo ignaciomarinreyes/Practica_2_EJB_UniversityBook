@@ -2,6 +2,7 @@ package entities;
 
 import components.PostUserBeanRemote;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +18,7 @@ public class Post {
     private int id;
     private String title;
     private User user;
-    private LocalDate date;
+    private LocalDateTime date;
     private String content;
     private String pathImage;
     private Set<User> likes;
@@ -26,8 +27,9 @@ public class Post {
     private List<String> links;
     private Subject subject;
     private RecognitionStrategy recognitionStrategy;
+    private int recognitionPost;
 
-    public Post(String title, User user, LocalDate date, String content, String pathImage, Subject subject, RecognitionStrategy recognintionStrategy) {
+    public Post(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject, RecognitionStrategy recognintionStrategy) {
         this.id = idPost++;
         this.title = title;
         this.user = user;
@@ -50,11 +52,11 @@ public class Post {
         this.title = title;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -115,10 +117,6 @@ public class Post {
     }
 
     public int numberLikes() {
-        for(User user: likes){
-            System.out.println(user.getId());
-        }
-        
         return likes.size();
     }
 
@@ -132,23 +130,27 @@ public class Post {
     }
 
     public void calculateRecognitions(PostUserBeanRemote postUserBean) {
-        recognitionStrategy.calculateDonationRecognitions(postUserBean);
+        recognitionPost = recognitionStrategy.calculateDonationRecognitions(postUserBean, this);       
     }
     
-    public static Post newFreeDonationPost(String title, User user, LocalDate date, String content, String pathImage, Subject subject){
+    public static Post newFreeDonationPost(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
         return new Post(title, user, date, content, pathImage, subject, new FreeRecognition()); 
     }
     
-    public static Post newMontlhlyDonationForAYear(String title, User user, LocalDate date, String content, String pathImage, Subject subject){
+    public static Post newMontlhlyDonationForAYear(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
         return new Post(title, user, date, content, pathImage, subject, new PeriodRecognition(1)); 
     }
     
-    public static Post newQuarterlyDonationForAYear(String title, User user, LocalDate date, String content, String pathImage, Subject subject){
+    public static Post newQuarterlyDonationForAYear(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
         return new Post(title, user, date, content, pathImage, subject,  new PeriodRecognition(3)); 
     }
     
-    public static Post newNowDonation(String title, User user, LocalDate date, String content, String pathImage, Subject subject){
+    public static Post newNowDonation(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject){
         return new Post(title, user, date, content, pathImage, subject, new NowRecognition()); 
+    }
+
+    public int getRecognitionPost() {
+        return recognitionPost;
     }
 
 }

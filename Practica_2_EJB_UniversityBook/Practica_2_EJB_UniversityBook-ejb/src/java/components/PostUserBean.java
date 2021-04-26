@@ -36,6 +36,7 @@ public class PostUserBean implements PostUserBeanRemote {
     private StudyBeanRemote studyBean;
     private List<DonationRecognition> donationRecognitions;
     private int donationTotal;
+    private int dontationTemp;
 
     @PostConstruct
     public void init() {
@@ -61,7 +62,7 @@ public class PostUserBean implements PostUserBeanRemote {
     }
 
     @Override
-    public void addPost(String title, User user, LocalDate date, String content, String pathImage, int idSubject, String donation) {
+    public void addPost(String title, User user, LocalDateTime date, String content, String pathImage, int idSubject, String donation) {
         statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
         logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::addPost::Añade un post");
         myPosts.add(chooseDonationPost(title, user, date, content, pathImage, studyBean.getSubjectById(idSubject), donation));
@@ -96,7 +97,7 @@ public class PostUserBean implements PostUserBeanRemote {
     }
 
     @Override
-    public void programPost(int miliseconds, String title, User user, LocalDate date, String content, String pathImage, int idSubject, String donation) {
+    public void programPost(int miliseconds, String title, User user, LocalDateTime date, String content, String pathImage, int idSubject, String donation) {
         statisticBean.addMapNumberInvokeBean("PostUserBean_" + this.hashCode());
         logBean.writeLogEJBInfo("PostUserBean_" + this.hashCode() + "::programPost::Se programa un post");
         allStatefulBean.setTimer(miliseconds, user, chooseDonationPost(title, user, date, content, pathImage, studyBean.getSubjectById(idSubject), donation));
@@ -122,11 +123,11 @@ public class PostUserBean implements PostUserBeanRemote {
         donationTotal = result;
         return result;
     }
-    
-    
 
     @Override
     public void calculateRecognitions() {
+        dontationTemp = donationTotal;
+        donationRecognitions.clear();
         for (Post post : myPosts) {
             post.calculateRecognitions(this);
         }
@@ -137,7 +138,7 @@ public class PostUserBean implements PostUserBeanRemote {
         donationRecognitions.add(donationRecognition);
     }
 
-    private Post chooseDonationPost(String title, User user, LocalDate date, String content, String pathImage, Subject subject, String donation) {
+    private Post chooseDonationPost(String title, User user, LocalDateTime date, String content, String pathImage, Subject subject, String donation) {
         switch (donation) {
             case "No donar":
                 return Post.newFreeDonationPost(title, user, date, content, pathImage, subject);
@@ -154,6 +155,10 @@ public class PostUserBean implements PostUserBeanRemote {
 
     @Override
     public int getDonationTotal() {
-        return donationTotal;
+        if(donationTotal <= dontationTemp){
+            return dontationTemp;
+        }else {
+            return donationTotal;
+        }
     }
 }

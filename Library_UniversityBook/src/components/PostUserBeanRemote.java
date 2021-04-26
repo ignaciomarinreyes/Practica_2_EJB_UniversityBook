@@ -22,7 +22,7 @@ import javax.naming.NamingException;
 @Remote
 public interface PostUserBeanRemote {
 
-    void addPost(String title, User user, LocalDate date, String content, String pathImage, int idSubject, String donation);
+    void addPost(String title, User user, LocalDateTime date, String content, String pathImage, int idSubject, String donation);
 
     void addDefaultMyPosts(User user);
 
@@ -34,7 +34,7 @@ public interface PostUserBeanRemote {
     
     User getUser();
 
-    void programPost(int miliseconds, String title, User user, LocalDate date, String content, String pathImage, int idSubject, String donation);
+    void programPost(int miliseconds, String title, User user, LocalDateTime date, String content, String pathImage, int idSubject, String donation);
 
     void addPost(Post post);
 

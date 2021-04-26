@@ -16,12 +16,12 @@
         String result = "";
         for (PostUserBean postUserBean : allStatefulBeanLocal.getAllPostUserBean()) {
             result += "<span style='text-decoration: underline;'>PostUserBean_" + postUserBean.hashCode() + " " + postUserBean.getUser().getName() + "</span><form action='FrontController' method='GET' style='display: inline;'><button type='submit'>Eliminar</button><input type='hidden' name='hashCode' value='" + postUserBean.hashCode() +"'><input type='hidden' name='command' value='RemoveStateful'></form>"
-                    + "<table style='width:100%'><tr><th>Id</th><th>Título</th><th>Asignatura</th></tr>";
+                    + "<table style='width:100%'><tr><th>Id</th><th>Título</th><th>Asignatura</th><th>Reconocimiento donación</th></tr>";
             for (Post post : postUserBean.getMyPosts()) {
-                result += "<tr><td>" + post.getId() + "</td><td>" + post.getTitle() + "</td><td>" + post.getSubject().getName() + "</td></tr>";
+                result += "<tr><td>" + post.getId() + "</td><td>" + post.getTitle() + "</td><td>" + post.getSubject().getName() + "</td><td>" + post.getRecognitionPost() + "</td></tr>";
             }
             result += "</table>"
-                   + "<ul><li style='margin-bottom: 15px;'>Total de donaciones de " + postUserBean.getUser().getName() + ": " + postUserBean.getDonationTotal() + "</li></ul>";
+                   + "<ul><li style='margin-bottom: 15px;'>Total de donaciones cobradas de " + postUserBean.getUser().getName() + ": " + postUserBean.getDonationTotal() + "</li></ul>";
         }
         return result;
     }

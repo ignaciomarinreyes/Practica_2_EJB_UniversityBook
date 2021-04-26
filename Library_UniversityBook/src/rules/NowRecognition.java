@@ -7,6 +7,7 @@ package rules;
 
 import components.PostUserBeanRemote;
 import entities.DonationRecognition;
+import entities.Post;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -17,8 +18,9 @@ import java.time.LocalDateTime;
 public class NowRecognition extends RecognitionStrategy{
 
     @Override
-    public void calculateDonationRecognitions(PostUserBeanRemote postUserBean) {
-        postUserBean.addDonationRecognition(new DonationRecognition(1, LocalDateTime.now()));
+    public int calculateDonationRecognitions(PostUserBeanRemote postUserBean, Post post) {        
+        postUserBean.addDonationRecognition(new DonationRecognition(1, post.getDate()));
+        return 1;
     }
     
 }

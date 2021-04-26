@@ -71,6 +71,7 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
     @Timeout
     public void timeout(Timer t) {
         postUserBeanChoosen.addPost(programmedPost);
+        postUserBeanChoosen.calculateRecognitions();
     }
 
     @Override
@@ -215,7 +216,6 @@ public class AllStatefulBean implements AllStatefulBeanLocal {
     
     @Schedule(second="*/5", minute="*", hour="*")
     public void updateDonationTotalPostUserBean(){
-        System.out.println("updateDonation");
         for(PostUserBean postUserBean: postUserBeans){
             postUserBean.recognizedDonation(LocalDateTime.now());
         }
