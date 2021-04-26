@@ -30,7 +30,7 @@ public interface PostUserBeanRemote {
 
     void calculateRecognitions();
 
-    public void addDonationRecognition(DonationRecognition donationRecognition);
+    void addDonationRecognition(DonationRecognition donationRecognition);
 
     int getDonationTotal();
 

@@ -20,7 +20,7 @@ public interface AllStatefulBeanLocal {
 
     void removePostUserBean(PostUserBean postUserBean);
 
-    public PostUserBean getPostUserBean(User user);
+    PostUserBean getPostUserBean(User user);
 
     void addFavouriteSubjectBean(FavouriteSubjectsBean subject);
 
